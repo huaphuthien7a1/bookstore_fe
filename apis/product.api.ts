@@ -41,8 +41,8 @@ export const filterBook = async ({
     if (params) params = params + '&order_by=' + order_by;
     else params = params + 'order_by=' + order_by;
   }
-  if (params) params = '?' + params + '&per_page=10&page=' + page;
-  else params = '?per_page=10';
+  if (params) params = '?' + params + '&per_page=12&page=' + page;
+  else params = '?per_page=12';
   return httpRequest.get(`/books${params}&page=` + page);
 };
 export const getBookDetailById = async (
