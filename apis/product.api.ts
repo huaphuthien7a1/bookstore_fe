@@ -22,6 +22,7 @@ export const filterBook = async ({
   publishers = '',
   price = '',
   order_by = '',
+  page = 1,
 }: any) => {
   let params = '';
   if (genres) {
@@ -40,9 +41,9 @@ export const filterBook = async ({
     if (params) params = params + '&order_by=' + order_by;
     else params = params + 'order_by=' + order_by;
   }
-  if (params) params = '?' + params + '&per_page=100';
-  else params = '?per_page=100';
-  return httpRequest.get(`/books${params}`);
+  if (params) params = '?' + params + '&per_page=10&page=' + page;
+  else params = '?per_page=10';
+  return httpRequest.get(`/books${params}&page=` + page);
 };
 export const getBookDetailById = async (
   id: string | number | null | undefined

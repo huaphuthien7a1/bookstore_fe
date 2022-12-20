@@ -1,5 +1,6 @@
 import { makeStyles } from '@mui/styles';
 import {
+  Box,
   Card,
   CardContent,
   CardMedia,
@@ -100,15 +101,24 @@ const ProductCard: React.FunctionComponent<IProductCard> = ({
         alt={product?.name}
         onClick={handleClickItem}
       /> */}
-      <Image
-        style={{ objectFit: 'contain', padding: '1rem 0', cursor: 'pointer' }}
-        src={product?.book_image}
-        quality={75}
-        width={200}
-        height={slideMode ? 150 : 200}
-        alt={product?.name}
-        onClick={handleClickItem}
-      />
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Image
+          style={{ objectFit: 'contain', padding: '1rem 0', cursor: 'pointer' }}
+          src={product?.book_image}
+          quality={75}
+          width={150}
+          height={slideMode ? 150 : 200}
+          alt={product?.name}
+          onClick={handleClickItem}
+        />
+      </Box>
       <CardContent sx={{ padding: 2, height: '100%' }}>
         <Stack spacing={1} direction="column" alignItems={'space-between'}>
           <Tooltip title={product?.name} placement="top">
@@ -119,7 +129,7 @@ const ProductCard: React.FunctionComponent<IProductCard> = ({
                 display: 'inline-block',
                 margin: 0,
                 fontSize: { xs: slideMode ? '12px' : '14px', sm: '14px' },
-                height: '50px',
+                height: '20px',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',

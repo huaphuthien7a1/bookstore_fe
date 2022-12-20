@@ -14,6 +14,7 @@ import {
   ButtonGroup,
   Drawer,
   CircularProgress,
+  Pagination,
 } from '@mui/material';
 import { useTheme, styled } from '@mui/material/styles';
 import { useState, useRef, useEffect } from 'react';
@@ -58,7 +59,9 @@ const Product = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const toast = useToast(dispatch, toggleSnackbar);
+  const [page, setPage] = useState<number>(1);
   const [listBook, setListBook] = useState<any[]>([]);
+  const [meta, setMeta] = useState<any>({});
   const [openSort, setOpenSort] = useState(false);
   const [genreList, setGenreList] = useState<number[]>([]);
   const [publisherList, setPublisherList] = useState<number[]>([]);
@@ -75,6 +78,7 @@ const Product = () => {
     useMutation((data: any) => filterBook(data), {
       onSuccess: (data: any) => {
         setListBook(data?.data);
+        setMeta(data?.meta);
       },
       onError: () => {
         toast({ type: 'error', message: 'Lỗi trong quá trình lấy dữ liệu' });
@@ -96,6 +100,7 @@ const Product = () => {
       publishers: '',
       price: '',
       order_by: '',
+      page: 1,
     });
   };
 
@@ -115,11 +120,14 @@ const Product = () => {
     genreParam = genreParam.slice(0, -1);
     publisherParam = publisherParam.slice(0, -1);
 
+    setPage(1);
+
     getFilterBook({
       genres: genreParam || '',
       publishers: publisherParam || '',
       price: price || '',
       order_by: '',
+      page: 1,
     });
   };
   useEffect(() => {
@@ -136,9 +144,10 @@ const Product = () => {
         publishers: '',
         price: '',
         order_by: '',
+        page: page,
       });
     }
-  }, [getFilterBook, router]);
+  }, [getFilterBook, router, page]);
   useEffect(() => {
     if (router.isReady && router?.query?.genre) {
       setGenreList([Number(router.query?.genre as any)] || []);
@@ -187,7 +196,29 @@ const Product = () => {
             <ProductCardItems
               isLoading={isGetingListFilterBook}
               data={listBook || []}
+              slideToShow={10}
             />
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                mt: 1.5,
+                mb: 2,
+              }}
+            >
+              <Pagination
+                className="shadow"
+                sx={{ p: 2, borderRadius: '8px' }}
+                variant="outlined"
+                shape="rounded"
+                color="primary"
+                count={meta?.last_page || 0}
+                page={page}
+                onChange={(event, value) => {
+                  setPage(value);
+                }}
+              />
+            </Box>
           </DivStyled>
           <Drawer
             variant={matches ? 'persistent' : 'temporary'}
