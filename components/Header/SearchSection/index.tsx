@@ -90,6 +90,7 @@ const SearchSection = () => {
             '.css-wmrpzn-MuiOutlinedInput-notchedOutline': {
               border: 'none !important',
             },
+            '.MuiOutlinedInput-notchedOutline': { border: 'none !important' },
           }}
         >
           {' '}

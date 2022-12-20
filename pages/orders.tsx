@@ -1,13 +1,12 @@
 import ProductLayout from '@/layout/ProductLayot';
-import { Typography, Box, Container, Paper } from '@mui/material';
+import { Box, Container, Paper } from '@mui/material';
 import OrderTitle from '@/components/orders/OrderTitle';
 import OrderTable from '@/components/orders/OrderTable';
 import useGetListOrder from '@/hooks/client/usetGetListOrder';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const OrdersHistory = () => {
-  const { data, isLoading, isFetching } = useGetListOrder();
-  console.log(data?.orders);
+  const { data, isLoading } = useGetListOrder();
   return (
     <ProductLayout>
       <Container maxWidth="md" disableGutters>
@@ -26,7 +25,7 @@ const OrdersHistory = () => {
           {isLoading ? (
             <LinearProgress />
           ) : (
-            <OrderTable items={data?.orders || []} />
+            <OrderTable items={data?.data || []} />
           )}
         </Box>
       </Container>

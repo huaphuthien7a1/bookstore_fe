@@ -1,7 +1,6 @@
 import AdminLayout from '@/layout/AdminLayout';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
-import useGetStatistic from '@/hooks/useGetStatistic';
 import { partStatisticTime } from '@/utils/parseTime';
 import TotalEarning from '@/components/statistics/TotalEarning';
 import TotalOrder from '@/components/statistics/TotalOrder';
