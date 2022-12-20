@@ -30,7 +30,7 @@ const MainCard: React.FunctionComponent<IMainCard> = ({
   const theme: any = useTheme();
 
   return (
-    <Card className="shadow" {...others} elevation={elevation}>
+    <Card className="shadow" sx={sx} {...others} elevation={elevation}>
       {/* card header and action */}
       {!darkTitle && title && (
         <CardHeader sx={headerSX} title={title} action={secondary} />

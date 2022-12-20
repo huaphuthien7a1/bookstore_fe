@@ -55,7 +55,7 @@ const Statistic = () => {
   return (
     <AdminLayout>
       <Grid container spacing={{ md: 2, xs: 1 }} sx={{ px: { md: 1, xs: 0 } }}>
-        <Grid item xs={12}>
+        <Grid sx={{ pt: '0 !important' }} item xs={12}>
           <Stack direction="row" spacing={1}>
             <Button
               onClick={() => {

@@ -53,18 +53,7 @@ const MenuList = () => {
 
   return (
     <>
-      <List
-        subheader={
-          <Typography
-            variant="caption"
-            sx={{ ...theme.typography.menuCaption }}
-            display="block"
-            gutterBottom
-          >
-            ADMIN
-          </Typography>
-        }
-      >
+      <List>
         {/* <NavItem item={listItem[0]} level={1} /> */}
         {listItem.map((item, _index) => (
           <NavItem key={_index} item={item} />

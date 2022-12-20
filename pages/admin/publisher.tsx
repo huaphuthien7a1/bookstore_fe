@@ -115,84 +115,81 @@ const PublisherManagement = () => {
   }, [refetch, page, searchContent]);
   return (
     <AdminLayout>
-      {' '}
-      <>
-        <MainCard title="Danh sách nhà xuất bản" darkTitle>
-          <Stack
-            direction={{ xs: 'column-reverse', sm: 'row' }}
-            alignItems={{ xs: 'flex-end', sm: 'center' }}
-            justifyContent={{ xs: 'space-between', sm: 'space-between' }}
-            spacing={1}
-          >
-            <SearchAdminSection
-              value={searchContent}
-              setValue={setSearchContent}
-              setPage={setPage}
-            />
-            <Button
-              disabled={isLoading || isFetching}
-              variant="contained"
-              sx={{
-                width: { xs: '100%', sm: '18rem' },
-                whiteSpace: 'nowrap',
-                boxShadow: 'none',
-              }}
-              onClick={() => setCurrentProduct({ data: null })}
-            >
-              <Stack
-                sx={{ padding: '5px 10px 5px 2px' }}
-                direction="row"
-                alignItems="center"
-                spacing={0.5}
-              >
-                <AddIcon fontSize="small" />
-                <Typography>Thêm thể loại</Typography>
-              </Stack>
-            </Button>
-          </Stack>
-          <Box mt={2}>
-            <DataGrid
-              sx={{
-                border: 1,
-                borderColor: 'rgba(0, 0, 0, 0.23)',
-                borderRadius: `${config.borderRadius}px`,
-                '.MuiDataGrid-footerContainer': {
-                  display: 'none',
-                },
-              }}
-              disableSelectionOnClick
-              autoHeight
-              disableColumnMenu
-              loading={isLoading || isFetching || isMutateLoading}
-              columns={columns}
-              rows={isLoading || isFetching ? [] : data?.data}
-              components={{
-                NoRowsOverlay: CustomNoRowsOverlay,
-                LoadingOverlay: LinearProgress,
-              }}
-            />
-          </Box>
-          <Box
-            sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 1.5 }}
-          >
-            <Pagination
-              sx={{ marginRight: 2 }}
-              variant="outlined"
-              shape="rounded"
-              color="primary"
-              count={data?.meta?.last_page || 0}
-              page={page}
-              onChange={(event, value) => setPage(value)}
-            />
-          </Box>
-          <PublisherModal
-            open={currentProduct !== null}
-            currentProduct={currentProduct}
-            handleClose={handleCloseModal}
-            refetchAfterClose={fetchData}
+      <MainCard title="Danh sách nhà xuất bản" darkTitle>
+        <Stack
+          direction={{ xs: 'column-reverse', sm: 'row' }}
+          alignItems={{ xs: 'flex-end', sm: 'center' }}
+          justifyContent={{ xs: 'space-between', sm: 'space-between' }}
+          spacing={1}
+        >
+          <SearchAdminSection
+            value={searchContent}
+            setValue={setSearchContent}
+            setPage={setPage}
           />
-        </MainCard>
-      </>
+          <Button
+            disabled={isLoading || isFetching}
+            variant="contained"
+            sx={{
+              width: { xs: '100%', sm: '18rem' },
+              whiteSpace: 'nowrap',
+              boxShadow: 'none',
+            }}
+            onClick={() => setCurrentProduct({ data: null })}
+          >
+            <Stack
+              sx={{ padding: '5px 10px 5px 2px' }}
+              direction="row"
+              alignItems="center"
+              spacing={0.5}
+            >
+              <AddIcon fontSize="small" />
+              <Typography>Thêm thể loại</Typography>
+            </Stack>
+          </Button>
+        </Stack>
+        <Box mt={2}>
+          <DataGrid
+            sx={{
+              border: 1,
+              borderColor: 'rgba(0, 0, 0, 0.23)',
+              borderRadius: `${config.borderRadius}px`,
+              '.MuiDataGrid-footerContainer': {
+                display: 'none',
+              },
+            }}
+            disableSelectionOnClick
+            autoHeight
+            disableColumnMenu
+            loading={isLoading || isFetching || isMutateLoading}
+            columns={columns}
+            rows={isLoading || isFetching ? [] : data?.data}
+            components={{
+              NoRowsOverlay: CustomNoRowsOverlay,
+              LoadingOverlay: LinearProgress,
+            }}
+          />
+        </Box>
+        <Box
+          sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 1.5 }}
+        >
+          <Pagination
+            sx={{ marginRight: 2 }}
+            variant="outlined"
+            shape="rounded"
+            color="primary"
+            count={data?.meta?.last_page || 0}
+            page={page}
+            onChange={(event, value) => setPage(value)}
+          />
+        </Box>
+        <PublisherModal
+          open={currentProduct !== null}
+          currentProduct={currentProduct}
+          handleClose={handleCloseModal}
+          refetchAfterClose={fetchData}
+        />
+      </MainCard>
     </AdminLayout>
   );
 };
