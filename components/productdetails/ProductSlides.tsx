@@ -6,13 +6,13 @@ import ProductCard from '../cards/products/ProductCard';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ProductCardSkeleton from '../cards/Skeleton/ProductCardSkelection';
 import { IProductSlides } from '@/interfaces/compontents/product.interface';
+import RelativeProductEmpty from './RelativeProductEmpty';
 import config from '../../config';
 
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css';
-
 const useStyles = makeStyles({
   carousel: {
     position: 'relative',
@@ -42,6 +42,7 @@ const useStyles = makeStyles({
 });
 
 const ProductSlides: FC<IProductSlides> = ({
+  detailData,
   slideData,
   isSlideLoading,
   isSlideFetching,
@@ -49,6 +50,9 @@ const ProductSlides: FC<IProductSlides> = ({
   const classes = useStyles();
   const matchSm = useMediaQuery('(max-width:600px)');
   const matchMd = useMediaQuery('(max-width:900px)');
+  if (!isSlideLoading && detailData && detailData?.genres?.length === 0) {
+    return <RelativeProductEmpty />;
+  }
   return (
     <div
       style={{ position: 'relative', borderRadius: '8px', padding: 3 }}
@@ -63,9 +67,11 @@ const ProductSlides: FC<IProductSlides> = ({
         modules={[Pagination, Navigation]}
         className={classes.carousel}
       >
-        {/* get only 7 item */}
-        {slideData?.data &&
-          slideData?.data.slice(0, 7).map((data: any, index: number) => (
+        {/* get only 10 item */}
+        {detailData &&
+          detailData?.genres?.length !== 0 &&
+          slideData?.data &&
+          slideData?.data.slice(0, 10).map((data: any, index: number) => (
             <SwiperSlide key={index}>
               <ProductCard
                 product={data}

@@ -4,6 +4,7 @@ export interface IProductInfo {
 }
 export interface IProductSlides {
   slideData: any;
+  detailData: any;
   isSlideLoading: boolean;
   isSlideFetching: boolean;
 }

@@ -23,10 +23,7 @@ const ProductDetail = () => {
   const [hiddenDescriptionFlag, setHiddenDescriptionFlag] =
     useState<boolean>(false);
   const [hiddenDescription, setHiddenDescription] = useState<boolean>(false);
-  const { data, isLoading, isFetching, refetch } = useGetListBookDetail(
-    id,
-    !!id
-  );
+  const { data, isLoading } = useGetListBookDetail(id, !!id);
   const {
     data: slideData,
     isLoading: isSlideLoading,
@@ -218,6 +215,7 @@ const ProductDetail = () => {
             Sản phẩm liên quan{' '}
           </Typography>
           <ProductSlides
+            detailData={data}
             slideData={slideData}
             isSlideLoading={isSlideLoading}
             isSlideFetching={isSlideFetching}
