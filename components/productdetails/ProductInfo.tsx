@@ -73,12 +73,12 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
             <Skeleton variant="rectangular" height={'100%'} />
           ) : (
             <Image
-              layout={'responsive'}
+              quality={75}
               width={300}
-              height={500}
+              height={400}
               src={data?.book_image || ''}
               alt={data?.name}
-              style={{ borderRadius: '8px' }}
+              style={{ borderRadius: '10px', objectFit: 'cover' }}
             />
           )}
         </Box>

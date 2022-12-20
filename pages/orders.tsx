@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ProductLayout from '@/layout/ProductLayot';
 import { Box, Container, Paper } from '@mui/material';
 import OrderTitle from '@/components/orders/OrderTitle';
@@ -6,7 +7,8 @@ import useGetListOrder from '@/hooks/client/usetGetListOrder';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const OrdersHistory = () => {
-  const { data, isLoading } = useGetListOrder();
+  const [page, setPage] = useState<number>(1);
+  const { data, isLoading } = useGetListOrder(page, 10);
   return (
     <ProductLayout>
       <Container maxWidth="md" disableGutters>
@@ -25,7 +27,12 @@ const OrdersHistory = () => {
           {isLoading ? (
             <LinearProgress />
           ) : (
-            <OrderTable items={data?.data || []} />
+            <OrderTable
+              page={page}
+              setPage={setPage}
+              items={data?.data || []}
+              data={data}
+            />
           )}
         </Box>
       </Container>

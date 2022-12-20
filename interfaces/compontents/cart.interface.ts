@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface ICartSection {
   data: any;
   isLoading: boolean;
@@ -46,4 +48,7 @@ export interface IPaymentTab {
 
 export interface IOrderTable {
   items: any;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
+  data: any;
 }

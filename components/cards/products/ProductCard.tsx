@@ -22,6 +22,7 @@ import { CART_CLIENT } from '@/constants/queryKeyName';
 import { useToast } from '@/hooks/useToast';
 import { moneyFormat } from '@/utils/moneyFormat';
 import Tooltip from '@mui/material/Tooltip';
+import Image from 'next/image';
 
 const useStyles = makeStyles({
   root: {
@@ -43,19 +44,17 @@ const ProductCard: React.FunctionComponent<IProductCard> = ({
   slideMode = false,
   isLoading = false,
 }) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const imgRef = useRef(null);
   const classes = useStyles();
   const dispatch = useDispatch();
   const handleClickItem = useCallback(() => {
-    // router.push(`product/${product?.id}`);
     router.push({
       pathname: '/product/[pid]',
       query: { pid: product?.id },
     });
   }, [product, router]);
-  const queryClient = useQueryClient();
-
   const toast = useToast(dispatch, toggleSnackbar);
   const { mutate: addToCartFunc, isLoading: isLoadingAddToCart } = useMutation(
     () => addToCart({ book_id: product?.id, quantity: 1 }),
@@ -92,12 +91,21 @@ const ProductCard: React.FunctionComponent<IProductCard> = ({
   if (isLoading) return <ProductCardSkeleton />;
   return (
     <Card className={slideMode ? classes.slide : classes.root}>
-      <CardMedia
+      {/* <CardMedia
         sx={{ objectFit: 'contain', padding: '1rem 0' }}
         ref={imgRef}
         component="img"
         height={slideMode ? '150px' : '200px'}
         image={product?.book_image}
+        alt={product?.name}
+        onClick={handleClickItem}
+      /> */}
+      <Image
+        style={{ objectFit: 'contain', padding: '1rem 0', cursor: 'pointer' }}
+        src={product?.book_image}
+        quality={75}
+        width={200}
+        height={slideMode ? 150 : 200}
         alt={product?.name}
         onClick={handleClickItem}
       />
