@@ -18,3 +18,4 @@ export const USER_ADMIN = 'user-admin';
 export const ORDERS = 'orders';
 export const STATISTICS = 'statistics';
 export const TOP_SELLING = 'top-selling';
+export const BOOK_GENRE = 'book-genre';

@@ -71,9 +71,15 @@ export const createBook = async (data: FormData | any) => {
 };
 
 export const getTopSelling = async () => {
-  return httpRequest.get(`/books?per_page=4&page=1&order_by=top_selling`);
+  return httpRequest.get(`/books?per_page=5&page=1&order_by=top_selling`);
 };
 
 export const getRelateBook = async (genres = '') => {
   return httpRequest.get(`/books?per_page=10&page=1=&genre=${genres}`);
+};
+
+export const getListBookByGenre = async (genresid: any, slideToShow = 5) => {
+  return httpRequest.get(
+    `/books?per_page=${slideToShow}&page=1=&genre=${genresid}`
+  );
 };

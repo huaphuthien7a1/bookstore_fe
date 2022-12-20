@@ -17,6 +17,14 @@ export interface IProductCardItems {
   slideToShow?: number;
   genreId?: number | null;
 }
+
+export interface IProductCardItemsByGenre {
+  title?: string;
+  titleIcon?: any;
+  titleBackground?: string;
+  slideToShow?: number;
+  genreId?: number | null;
+}
 export interface IProductCardSkeleton {
   slideMode?: boolean;
 }

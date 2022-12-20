@@ -1,39 +1,27 @@
 import { Box, Container } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import useGetListBookClient from '../hooks/client/useGetListBookClient';
 import useGetListGenreClient from '../hooks/client/useGetListGenreClient';
 import ProductCardItems from '../components/cards/products/ProductCardItems';
 import CarouselCustumized from '@/components/carousel/CarouselCustumized';
 import HomeLayout from '@/layout/HomeLayout';
 import useGetTopSelling from '@/hooks/client/useGetTopSelling';
+import ProductCardItemsByGenre from '@/components/cards/products/ProductCartItemsByGenre';
 
 const Home = () => {
-  const theme = useTheme();
   const { data: topSelling, isLoading: isTopSellLoading } = useGetTopSelling();
 
-  const {
-    data: genreData,
-    isLoading: isGenreLoading,
-    isFetching: isGenreFetching,
-  } = useGetListGenreClient(!!topSelling);
-  const {
-    data: bookData,
-    isLoading: isBookLoading,
-    isFetching: isBookFetching,
-    refetch,
-  } = useGetListBookClient();
+  const { data: genreData, isLoading: isGenreLoading } = useGetListGenreClient(
+    !!topSelling
+  );
   const renderGenres = () => {
     if (!isGenreLoading) {
       return (
         genreData &&
         genreData?.data?.slice(0, 4)?.map((genre: any, _index: number) => {
           return (
-            <ProductCardItems
+            <ProductCardItemsByGenre
               key={_index}
               slideToShow={5}
-              isLoading={isBookLoading}
-              data={bookData?.data}
               title={genre?.name}
               titleBackground={'#e8d5f9'}
               genreId={genre?.id}
