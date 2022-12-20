@@ -14,9 +14,6 @@ import 'swiper/css/autoplay';
 import 'swiper/css';
 
 const useStyles = makeStyles({
-  container: {
-    position: 'relative',
-  },
   carousel: {
     position: 'relative',
     borderRadius: config.borderRadius,
@@ -53,7 +50,10 @@ const ProductSlides: FC<IProductSlides> = ({
   const matchSm = useMediaQuery('(max-width:600px)');
   const matchMd = useMediaQuery('(max-width:900px)');
   return (
-    <div className={classes.container}>
+    <div
+      style={{ position: 'relative', borderRadius: '8px', padding: 3 }}
+      className="shadow"
+    >
       <Swiper
         slidesPerView={matchSm ? 2 : matchMd ? 3 : 5}
         spaceBetween={5}

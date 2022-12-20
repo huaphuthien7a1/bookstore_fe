@@ -14,6 +14,7 @@ import ProductLayout from '../../layout/ProductLayot';
 import { useRouter } from 'next/router';
 import { useEffect, useState, useRef } from 'react';
 import LoadingScreen from '../../components/loading/LoadingScreen';
+import useGetRelativeBook from '@/hooks/client/useGetRelativeBook';
 
 const ProductDetail = () => {
   const router = useRouter();
@@ -26,12 +27,11 @@ const ProductDetail = () => {
     id,
     !!id
   );
-
   const {
     data: slideData,
     isLoading: isSlideLoading,
     isFetching: isSlideFetching,
-  } = useGetListBookClient();
+  } = useGetRelativeBook(data, !!data);
 
   const numberOfLine = () => {
     if (desRef?.current) return desRef?.current?.clientHeight / 20;
@@ -39,12 +39,10 @@ const ProductDetail = () => {
   };
 
   useEffect(() => {
-    console.log(router?.query);
     if (router.isReady) {
       setId(router?.query?.id as any);
     }
   }, [router, setId]);
-  console.log(data);
 
   useEffect(() => {
     if (numberOfLine() > 3 && !hiddenDescriptionFlag) {
@@ -68,10 +66,18 @@ const ProductDetail = () => {
           }}
         >
           <Stack>
-            <Stack direction="row" sx={{ p: 1 }}>
+            <Stack direction="row">
               <ProductInfo data={data} isLoading={isLoading} />
             </Stack>
-            <Stack sx={{ px: { xs: 2, sm: 4 }, py: { xs: 2, sm: 4 } }}>
+            <Stack
+              className="shadow"
+              sx={{
+                px: { xs: 2, sm: 2 },
+                py: { xs: 2, sm: 4 },
+                borderRadius: '8px',
+                mt: { md: 2, xs: 1 },
+              }}
+            >
               <Typography
                 variant="h3"
                 sx={{ py: { xs: 1, md: 1 }, px: { xs: 1, md: 1 } }}
@@ -197,7 +203,18 @@ const ProductDetail = () => {
           </Stack>
         </Paper>
         <Stack direction="column" sx={{ mb: 4 }}>
-          <Typography variant="h3" sx={{ py: 2 }}>
+          <Typography
+            className="shadow"
+            variant="h3"
+            sx={{
+              my: 1,
+              py: 1,
+              px: 2,
+              display: 'inline-block',
+              width: 'fit-content',
+              borderRadius: '8px',
+            }}
+          >
             Sản phẩm liên quan{' '}
           </Typography>
           <ProductSlides

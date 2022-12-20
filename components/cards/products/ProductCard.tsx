@@ -35,7 +35,6 @@ const useStyles = makeStyles({
     '& .MuiCardMedia-root ': { cursor: 'pointer' },
     '& .MuiTypography-h5': { cursor: 'pointer' },
     height: '252px',
-    border: '1px solid rgba(0,0,0,0.15)',
   },
 });
 

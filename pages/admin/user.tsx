@@ -92,7 +92,6 @@ const UserManagement = () => {
     },
   ];
 
-  console.log('data', data);
   return (
     <AdminLayout>
       <>

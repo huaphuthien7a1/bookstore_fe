@@ -34,12 +34,8 @@ const ContactUs = () => {
         'XRKVw4KhOaO7XY_gb'
       )
       .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
+        (result) => {},
+        (error) => {}
       );
     e.currentTarget.reset();
   };

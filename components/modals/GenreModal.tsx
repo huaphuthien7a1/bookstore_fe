@@ -44,7 +44,6 @@ const GenreModal: FC<IModal> = ({
     submit: null,
   };
   const handleExit = (currentValues: any) => {
-    console.log(currentValues);
     if (objectEquals(initialValues, currentValues)) {
       handleClose();
     } else {

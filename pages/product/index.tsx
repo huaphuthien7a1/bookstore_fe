@@ -144,9 +144,6 @@ const Product = () => {
       setGenreList([Number(router.query?.genre as any)] || []);
     }
   }, [router]);
-  useEffect(() => {
-    console.log('open', openFilter);
-  });
   return (
     <ProductLayout>
       <Paper

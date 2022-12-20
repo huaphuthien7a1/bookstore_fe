@@ -43,7 +43,6 @@ const AuthorModal: FC<IModal> = ({
     submit: null,
   };
   const handleExit = (currentValues: any) => {
-    console.log(currentValues);
     if (objectEquals(initialValues, currentValues)) {
       handleClose();
     } else {
@@ -51,7 +50,6 @@ const AuthorModal: FC<IModal> = ({
     }
   };
   const toast = ({ type, message }: { type: string; message: string }) => {
-    console.log({ type, message });
     dispatch(toggleSnackbar({ open: true, message, type }));
   };
   return open ? (

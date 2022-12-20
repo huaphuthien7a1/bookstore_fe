@@ -53,10 +53,10 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
   return (
     <Stack
       direction={{ xs: 'column', md: 'row' }}
-      sx={{ pt: { xs: 2, sm: 4 }, pl: { xs: 2, sm: 4 }, pr: { xs: 2, sm: 4 } }}
-      spacing={2}
+      spacing={{ xs: 1, md: 2 }}
+      sx={{ pt: '0 !important', pr: '0 !important', pl: '0 !important' }}
     >
-      <Box>
+      <Box className="shadow" sx={{ borderRadius: '8px', py: 2 }}>
         <Box
           sx={{
             width: { xs: '100%', md: '300px' },
@@ -82,12 +82,12 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
           )}
         </Box>
       </Box>
-      <Box>
-        <Grid container sx={{ marginLeft: { xs: 0, sm: '1rem', md: '2rem' } }}>
+      <Box className="shadow" sx={{ width: '100%', borderRadius: '8px' }}>
+        <Grid container sx={{ ml: { md: 4, xs: 4 }, pb: 2 }}>
           <Grid
             item
             xs={12}
-            sx={{ px: { xs: 0, md: 1.5 }, py: { xs: 1, md: 1.5 } }}
+            sx={{ px: { xs: 0, md: 1.5 }, py: { xs: 1, md: 1.5 }, mt: 2 }}
           >
             <Typography variant="h3" fontSize="24px" fontWeight="500">
               {data?.name}

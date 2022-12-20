@@ -15,7 +15,6 @@ const SubmitCart: React.FunctionComponent<ISubmitCart> = ({
   listAddress,
   refetchListCart,
 }) => {
-  console.log('$123', listAddress);
   const defaultAddress = (listAddress || []).find(
     (item: any) => item?.is_default === 1
   );
