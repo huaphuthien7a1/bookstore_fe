@@ -147,8 +147,9 @@ const AuthorManagement = () => {
           </Stack>
           <Box mt={2}>
             <DataGrid
+              className="shadow"
               sx={{
-                border: 1,
+                border: 'none !important',
                 borderColor: 'rgba(0, 0, 0, 0.23)',
                 borderRadius: `${config.borderRadius}px`,
                 '.MuiDataGrid-footerContainer': {
@@ -171,7 +172,8 @@ const AuthorManagement = () => {
             sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 1.5 }}
           >
             <Pagination
-              sx={{ marginRight: 2 }}
+              className="shadow"
+              sx={{ p: 2, borderRadius: '8px' }}
               variant="outlined"
               shape="rounded"
               color="primary"

@@ -49,6 +49,7 @@ const Statistic = () => {
       ),
       endDate: partStatisticTime(new Date().toISOString()),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
   return (
