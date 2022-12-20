@@ -59,7 +59,16 @@ const SearchAdminSection: FC<ISearchAdminSection> = ({
   }, [handleSearch]);
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box
+      className="shadow"
+      sx={{
+        borderRadius: '4px',
+        width: 'fit-content',
+        '.css-wmrpzn-MuiOutlinedInput-notchedOutline': {
+          border: 'none !important',
+        },
+      }}
+    >
       <OutlineInputStyle
         ref={inputRef}
         id="input-search-admin"

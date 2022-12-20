@@ -1,18 +1,11 @@
 import {
   Typography,
   Box,
-  Container,
   Grid,
-  Card,
   CardContent,
   Paper,
   IconButton,
   Button,
-  Popper,
-  ClickAwayListener,
-  Grow,
-  MenuItem,
-  MenuList,
   FormControl,
   FormControlLabel,
   Checkbox,
@@ -20,7 +13,6 @@ import {
   Radio,
   ButtonGroup,
   Drawer,
-  Stack,
   CircularProgress,
 } from '@mui/material';
 import { useTheme, styled } from '@mui/material/styles';
@@ -30,20 +22,15 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ProductLayout from '../../layout/ProductLayot';
-import MainCard from '../../components/cards/MainCard';
 import ProductCardItems from '../../components/cards/products/ProductCardItems';
-import useGetListBookClient from '@/hooks/client/useGetListBookClient';
 import useGetListGenreClient from '@/hooks/client/useGetListGenreClient';
-import useGetListAuthorClient from '@/hooks/client/useGetListAuthorClient';
 import useGetListPublisherClient from '@/hooks/client/useGetListPublisherClient';
-import LinearProgress from '@mui/material/LinearProgress';
 import { useRouter } from 'next/router';
 import { filterBook } from '@/apis/product.api';
 import { useMutation } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { toggleSnackbar } from '@/store/snackbarReducer';
 import { useToast } from '@/hooks/useToast';
-import OrderTitle from '@/components/orders/OrderTitle';
 import ProductTitle from '@/components/products/ProductTitle';
 
 const drawerWidth = 400;
@@ -66,27 +53,24 @@ const DivStyled = styled('div', {
   }),
 }));
 const Product = () => {
+  const matches = useMediaQuery('(min-width:700px)');
   const theme: any = useTheme();
   const router = useRouter();
   const dispatch = useDispatch();
   const toast = useToast(dispatch, toggleSnackbar);
-  const getListBookQuery = useGetListBookClient();
+  const [listBook, setListBook] = useState<any[]>([]);
+  const [openSort, setOpenSort] = useState(false);
+  const [genreList, setGenreList] = useState<number[]>([]);
+  const [publisherList, setPublisherList] = useState<number[]>([]);
+  const [price, setPrice] = useState<string>('');
+  const [openFilter, setOpenFilter] = useState<boolean>(true);
   const getListGenreQuery = useGetListGenreClient();
   const getListPublisherQuery = useGetListPublisherClient();
 
-  const {
-    data: publisherData,
-    isLoading: isPublisherLoading,
-    isFetching: isPublisherFetching,
-  } = getListPublisherQuery;
+  const { data: publisherData, isLoading: isPublisherLoading } =
+    getListPublisherQuery;
   const { data: genreData, isLoading: isGenreLoading } = getListGenreQuery;
-  const {
-    data: bookData,
-    isLoading: isBookLoading,
-    isFetching: isBookFetching,
-    refetch,
-  } = getListBookQuery;
-  const [listBook, setListBook] = useState<any[]>([]);
+
   const { mutate: getFilterBook, isLoading: isGetingListFilterBook } =
     useMutation((data: any) => filterBook(data), {
       onSuccess: (data: any) => {
@@ -96,64 +80,45 @@ const Product = () => {
         toast({ type: 'error', message: 'Lỗi trong quá trình lấy dữ liệu' });
       },
     });
-  //End fetch
-  const matches = useMediaQuery('(min-width:700px)');
-  const [searchValue, setSearchValue] = useState<string>('');
-  const sortOptions = [
-    'Giá: Cao → Thấp',
-    'Giá: Thấp → Cao',
-    'Phổ biến',
-    'Giảm giá',
-    'Mới nhất',
-  ];
-  const [openSort, setOpenSort] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(2);
-  const [openFilter, setOpenFilter] = useState<boolean>(true);
+
   const handleToggleFilter = () => {
     setOpenFilter((prevOpenSort) => !prevOpenSort);
   };
-  const [genreList, setGenreList] = useState<number[]>([]);
+
   const anchorRef = useRef<any>(null);
-  // Handle Clear Filter
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const handleClearAllFilter = () => {};
-  const handleToggleSort = () => {
-    setOpenSort((prevOpenSort) => !prevOpenSort);
-  };
-  const handleSortItemClick = (event: any, index: any) => {
-    setSelectedIndex(index);
-    setOpenSort(false);
-    // Handle Sort product's view
-  };
-  const handleCloseSort = (event: MouseEvent | TouchEvent) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
 
-    setOpenSort(false);
+  const handleClearAllFilter = () => {
+    setGenreList([]);
+    setPublisherList([]);
+    setPrice('');
+    getFilterBook({
+      genres: '',
+      publishers: '',
+      price: '',
+      order_by: '',
+    });
   };
 
-  function handleListKeyDownSort(event: any) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpenSort(false);
-    } else if (event.key === 'Escape') {
-      setOpenSort(false);
-    }
-  }
   const prevOpenSort = useRef(openSort);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     let genreParam = '';
+    let publisherParam = '';
     genreList.forEach((genre: number) => {
       genreParam += genre + '_';
     });
+    publisherList.forEach((publisher: number) => {
+      publisherParam += publisher + '_';
+    });
+
     genreParam = genreParam.slice(0, -1);
+    publisherParam = publisherParam.slice(0, -1);
+
     getFilterBook({
-      genres: genreParam,
-      publishers: '',
-      price: '',
+      genres: genreParam || '',
+      publishers: publisherParam || '',
+      price: price || '',
       order_by: '',
     });
   };
@@ -164,7 +129,6 @@ const Product = () => {
 
     prevOpenSort.current = openSort;
   }, [openSort]);
-  console.log(listBook);
   useEffect(() => {
     if (router.isReady) {
       getFilterBook({
@@ -189,13 +153,15 @@ const Product = () => {
         sx={{
           backgroundColor: '#fff',
           px: { xs: 1.5, md: 2 },
-          py: { xs: 1, md: 2 },
+          py: { xs: 2, md: 2 },
           mb: { xs: 1, md: 2 },
         }}
+        className="shadow"
       >
         <ProductTitle />
       </Paper>
       <Box
+        className="shadow"
         sx={{
           backgroundColor: '#fff',
           borderRadius: '8px',
@@ -242,6 +208,9 @@ const Product = () => {
                 position: matches ? 'relative' : 'inherit',
                 display: 'flex',
                 wordBreak: 'break-work',
+                border: 'none',
+                boxShadow:
+                  'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px',
               },
             }}
           >
@@ -249,7 +218,6 @@ const Product = () => {
               <Box
                 sx={{
                   marginTop: 0,
-                  transform: 'none',
                   transition: 'transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
                   width: '100%',
                 }}
@@ -267,11 +235,13 @@ const Product = () => {
                             display: 'flex',
                             alignItems: 'center',
                             cursor: 'pointer',
+                            pb: 1,
                           }}
                         >
-                          <IconButton sx={{ padding: '0 0 10px 0' }}>
+                          <IconButton sx={{ padding: '0 5px 0 0 ' }}>
                             <ArrowForwardIosRoundedIcon />
                           </IconButton>
+                          <Typography>Đóng bộ lọc</Typography>
                         </Box>
                       </Grid>
                       <Grid item xs={12}>
@@ -319,26 +289,87 @@ const Product = () => {
                             )}
                           </Grid>
                         </FormControl>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h4">Nhà xuất bản</Typography>
+                        <FormControl>
+                          <Grid display="flex" container>
+                            {isPublisherLoading ? (
+                              <Grid item xs={12}>
+                                <Box sx={{ display: 'flex', p: 2 }}>
+                                  <CircularProgress size={20} />
+                                </Box>
+                              </Grid>
+                            ) : (
+                              publisherData?.data?.map(
+                                (publisher: any, _index: number) => (
+                                  <FormControlLabel
+                                    key={_index}
+                                    label={publisher?.name}
+                                    checked={
+                                      !!publisherList?.find(
+                                        (item: number) => item === publisher?.id
+                                      )
+                                    }
+                                    onChange={() => {
+                                      if (
+                                        !!publisherList?.find(
+                                          (item: number) =>
+                                            item === publisher?.id
+                                        )
+                                      ) {
+                                        const newPublisherList =
+                                          publisherList.filter(
+                                            (item) => item !== publisher?.id
+                                          );
+                                        setPublisherList(newPublisherList);
+                                      } else {
+                                        setPublisherList((pre: number[]) => [
+                                          ...pre,
+                                          publisher?.id,
+                                        ]);
+                                      }
+                                    }}
+                                    control={<Checkbox />}
+                                  />
+                                )
+                              )
+                            )}
+                          </Grid>
+                        </FormControl>
+                      </Grid>
+                      <Grid item xs={12}>
                         <Typography variant="h4">Giá</Typography>
                         <FormControl>
-                          <RadioGroup row name="row-radio-buttons-group">
+                          <RadioGroup
+                            row
+                            name="row-radio-buttons-group"
+                            onChange={(
+                              event: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                              setPrice(
+                                (event.target as HTMLInputElement).value
+                              );
+                            }}
+                            value={price}
+                          >
                             <FormControlLabel
-                              value="pricelist-1"
+                              value="0,50000"
                               control={<Radio />}
                               label="0 &#x20AB; - 50.000 &#x20AB; "
                             />
                             <FormControlLabel
-                              value="pricelist-2"
+                              value="50000,100000"
                               control={<Radio />}
                               label="50.000 &#x20AB; - 100.000 &#x20AB; "
                             />
                             <FormControlLabel
-                              value="pricelist-3"
+                              value="100000,200000"
                               control={<Radio />}
                               label="100.000 &#x20AB; - 200.000 &#x20AB; "
                             />
                             <FormControlLabel
-                              value="pricelist-4"
+                              value="200000,1000000"
                               control={<Radio />}
                               label="Trên 200.000 &#x20AB; "
                             />
@@ -354,15 +385,15 @@ const Product = () => {
                       >
                         <Button
                           type="submit"
-                          color="primary"
+                          color="info"
                           variant="contained"
                           sx={{ marginRight: 1 }}
                         >
                           Lọc
                         </Button>
                         <Button
-                          color="error"
-                          variant="contained"
+                          color="info"
+                          variant="outlined"
                           onClick={handleClearAllFilter}
                         >
                           Xóa Tất Cả Lọc

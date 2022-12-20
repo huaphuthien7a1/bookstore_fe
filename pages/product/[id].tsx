@@ -196,7 +196,7 @@ const ProductDetail = () => {
             </Stack>
           </Stack>
         </Paper>
-        <Stack direction="column">
+        <Stack direction="column" sx={{ mb: 4 }}>
           <Typography variant="h3" sx={{ py: 2 }}>
             Sản phẩm liên quan{' '}
           </Typography>

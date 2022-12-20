@@ -30,20 +30,7 @@ const MainCard: React.FunctionComponent<IMainCard> = ({
   const theme: any = useTheme();
 
   return (
-    <Card
-      {...others}
-      elevation={elevation}
-      sx={{
-        border: border ? '1px solid' : 'none',
-        borderColor: theme.palette.primary[200] + 75,
-        ':hover': {
-          boxShadow: boxShadow
-            ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)'
-            : 'inherit',
-        },
-        ...sx,
-      }}
-    >
+    <Card className="shadow" {...others} elevation={elevation}>
       {/* card header and action */}
       {!darkTitle && title && (
         <CardHeader sx={headerSX} title={title} action={secondary} />

@@ -13,7 +13,7 @@ const Logo: React.FunctionComponent = () => {
     router && router.push('/');
   }, [router]);
   return (
-    <Box onClick={() => redirectToHome()} sx={{ paddingTop: 1.5 }}>
+    <Box onClick={() => redirectToHome()} sx={{ pt: 1.5 }}>
       <Image
         src={logoIcon}
         alt="logo"

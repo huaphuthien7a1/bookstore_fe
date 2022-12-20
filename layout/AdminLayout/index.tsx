@@ -29,7 +29,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
         duration: theme.transitions.duration.leavingScreen,
       }),
       [theme.breakpoints.up('md')]: {
-        marginLeft: -(drawerWidth - 20),
+        marginLeft: '20px',
         width: `calc(100% - ${drawerWidth}px)`,
       },
       [theme.breakpoints.down('md')]: {
@@ -41,10 +41,10 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
         paddingRight: '8px',
       },
       [theme.breakpoints.down('sm')]: {
-        marginLeft: '10px',
+        paddingLeft: '8px',
+        paddingRight: '8px',
+        marginLeft: 0,
         width: `calc(100% - ${drawerWidth}px)`,
-        padding: '16px',
-        marginRight: '10px',
       },
     }),
     ...(open && {
@@ -53,13 +53,15 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
         duration: theme.transitions.duration.enteringScreen,
       }),
       marginLeft: 0,
-
+      marginTop: '100px',
       width: `calc(100% - ${drawerWidth}px)`,
       [theme.breakpoints.down('md')]: {
-        marginLeft: '20px',
+        paddingLeft: '8px',
+        paddingRight: '8px',
       },
       [theme.breakpoints.down('sm')]: {
-        marginLeft: '10px',
+        paddingLeft: '8px',
+        paddingRight: '8px',
       },
     }),
   })

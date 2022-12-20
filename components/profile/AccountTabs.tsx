@@ -10,7 +10,7 @@ const AccountTabs: React.FunctionComponent = () => {
     setCurrentTab(newValue);
   };
   return (
-    <>
+    <Box sx={{ mb: 1 }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs onChange={handleChange} value={currentTab}>
           <Tab label="Thông tin tài khoản" value={0} />
@@ -19,7 +19,7 @@ const AccountTabs: React.FunctionComponent = () => {
       </Box>
       {currentTab === 0 && <ProfileTab />}
       {currentTab === 1 && <SecurityTab />}
-    </>
+    </Box>
   );
 };
 export default AccountTabs;

@@ -26,6 +26,16 @@ const Footer = () => {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: '#e3f2fd',
+        position: 'relative',
+        '::before': {
+          content: '""',
+          position: 'absolute',
+          top: '-0.4rem',
+          left: 0,
+          height: '0.4rem',
+          width: '100%',
+          background: 'linear-gradient(transparent,rgba(136, 165, 191, 0.3))',
+        },
       }}
     >
       <Box sx={{ backgroundColor: '#fff', p: 1 }}>

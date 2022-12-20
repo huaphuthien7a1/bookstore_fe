@@ -63,7 +63,7 @@ const ProductLayout: NextPageWithLayout<ILayout> = ({
           display: 'flex',
           minHeight: '100vh',
           flexDirection: 'column',
-          backgroundColor: theme.palette.primary.light,
+          backgroundColor: '#fff',
         }}
       >
         <CssBaseline />
@@ -73,7 +73,7 @@ const ProductLayout: NextPageWithLayout<ILayout> = ({
           color="inherit"
           elevation={0}
           sx={{
-            backgroundColor: theme.palette.background.default,
+            backgroundColor: '#fff',
             transition: leftDrawerOpened
               ? theme.transitions.create('width')
               : 'none',

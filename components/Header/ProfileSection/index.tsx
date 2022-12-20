@@ -65,6 +65,7 @@ const ProfileSection: React.FunctionComponent = () => {
   return (
     <div>
       <ButtonBase
+        className="shadow"
         id="basic-base-button"
         onClick={handleClick}
         sx={{ borderRadius: '12px' }}

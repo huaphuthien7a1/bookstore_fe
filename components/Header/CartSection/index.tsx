@@ -32,7 +32,7 @@ const CartSection: React.FunctionComponent<ICartSection> = ({
         mr: 1.5,
       }}
     >
-      <ButtonBase sx={{ borderRadius: '12px' }}>
+      <ButtonBase sx={{ borderRadius: '12px' }} className="shadow">
         <Badge badgeContent={data ? data?.length : 0} color="primary">
           <Avatar
             variant="rounded"

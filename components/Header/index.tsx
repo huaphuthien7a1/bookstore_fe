@@ -63,7 +63,8 @@ const Header: FC<IHeader> = ({
                 left: 0,
                 height: '0.4rem',
                 width: '100%',
-                background: 'linear-gradient(rgba(0,0,0,.3),transparent)',
+                background:
+                  'linear-gradient(rgba(136, 165, 191, 0.48),transparent)',
               },
             }
           : {
@@ -106,7 +107,7 @@ const Header: FC<IHeader> = ({
             display: 'flex',
             alignItems: 'center',
             width: '100%',
-            justifyContent: { xs: 'space-between', md: 'space-between' },
+            justifyContent: { xs: 'space-between', md: 'flex-end' },
           }}
         >
           {!hideHomeScript && matches && (
@@ -137,22 +138,27 @@ const Header: FC<IHeader> = ({
             </Box>
           )}
 
-          {!hideSidebarIcon && (
-            <IconButton
-              size="small"
-              color="secondary"
+          {!hideSidebarIcon && !matches && (
+            <Box
+              className="shadow"
+              sx={{ borderRadius: '8px' }}
               onClick={() => handleLeftDrawerToggle()}
-              sx={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                padding: '5px',
-                margin: 0,
-                height: 'fit-content',
-                width: 'fit-content !important',
-              }}
             >
-              <MenuIcon fontSize="small" />
-            </IconButton>
+              <IconButton
+                size="small"
+                color="secondary"
+                sx={{
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  padding: '5px',
+                  margin: 0,
+                  height: 'fit-content',
+                  width: 'fit-content !important',
+                }}
+              >
+                <MenuIcon fontSize="small" />
+              </IconButton>
+            </Box>
           )}
           {/* header search */}
           {!hideSearch && <SearchSection />}

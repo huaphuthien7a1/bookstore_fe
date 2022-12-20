@@ -4,11 +4,11 @@
 *::-webkit-scrollbar {
   background-color: #fff;
   border-radius: 6px;
-  width: 16px;
+  width: 14px;
 }
 *::-webkit-scrollbar-track {
   background-color: #fff;
-  border-radius: 6px;
+  border-radius: 0px;
 }
 *::-webkit-scrollbar-thumb {
   background-color: #babac0;
@@ -73,5 +73,6 @@
   overflow: hidden !important;
 }
 .shadow {
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }

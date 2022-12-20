@@ -15,7 +15,7 @@ export const getAllAuthor = async (
   );
 };
 export const getAllAuthorClient = async () => {
-  return httpRequest.get('/authors?per_page=999');
+  return httpRequest.get('/authors?per_page=100');
 };
 export const editAuthor = async (
   id: string | number | undefined,

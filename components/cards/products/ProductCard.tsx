@@ -25,23 +25,17 @@ import Tooltip from '@mui/material/Tooltip';
 
 const useStyles = makeStyles({
   root: {
-    transition: 'transform 0.3s ease-in-out',
-    '&:hover': { transform: 'scale3d(1.02, 1.02, 1)' },
     '& .MuiCardMedia-root ': { cursor: 'pointer' },
     '& .MuiTypography-h5': { cursor: 'pointer' },
     maxHeight: '350px',
     height: '100%',
-    boxShadow:
-      '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+    border: '1px solid rgba(0,0,0,0.15)',
   },
   slide: {
-    transition: 'transform 0.3s ease-in-out',
-    '&:hover': { transform: 'scale3d(1.02, 1.02, 1)' },
     '& .MuiCardMedia-root ': { cursor: 'pointer' },
     '& .MuiTypography-h5': { cursor: 'pointer' },
     height: '252px',
-    boxShadow:
-      '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+    border: '1px solid rgba(0,0,0,0.15)',
   },
 });
 

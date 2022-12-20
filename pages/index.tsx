@@ -48,7 +48,9 @@ const Home = () => {
       <Container
         maxWidth="lg"
         sx={{
-          pt: 1,
+          display: { xs: 'none', sm: 'block' },
+          pt: 2,
+          pb: 1,
           px: {
             xs: '8px !important',
             sm: '8px !important',
@@ -86,6 +88,7 @@ const Home = () => {
             titleIcon={<LocalFireDepartmentIcon color="error" />}
             titleBackground="#FCDDEF"
           />
+
           {renderGenres()}
         </Box>
       </Container>

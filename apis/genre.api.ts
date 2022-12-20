@@ -15,7 +15,7 @@ export const getAllGenre = async (
   );
 };
 export const getAllGenreClient = async () => {
-  return httpRequest.get('/genres?per_page=999');
+  return httpRequest.get('/genres?per_page=100');
 };
 export const editGenre = async (
   id: string | number | undefined,

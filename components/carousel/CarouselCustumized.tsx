@@ -13,9 +13,6 @@ import 'swiper/css/autoplay';
 import 'swiper/css';
 
 const useStyles = makeStyles({
-  container: {
-    position: 'relative',
-  },
   carousel: {
     position: 'relative',
     borderRadius: config.borderRadius,
@@ -63,7 +60,10 @@ const CarouselCustumized: React.FunctionComponent = () => {
   const images = ['Img1', 'Img2', 'Img3'];
 
   return (
-    <div className={classes.container}>
+    <div
+      style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden' }}
+      className="shadow"
+    >
       <Swiper
         spaceBetween={1}
         modules={[Pagination, Autoplay, Navigation]}

@@ -70,34 +70,48 @@ const ProductCardItems: React.FunctionComponent<IProductCardItems> = ({
   };
 
   return (
-    <section className={classes.container}>
-      {title && (
-        <Stack
-          sx={{ padding: '1rem', backgroundColor: titleBackground }}
-          direction={'row'}
-          spacing={1}
-        >
-          {titleIcon ? titleIcon : null}
-          <Typography fontWeight={'bold'} fontSize={'1rem'} variant={'h5'}>
-            {title}
-          </Typography>
-        </Stack>
-      )}
+    <Box
+      component={'section'}
+      sx={{
+        display: 'flex',
+        rowGap: '0.2rem',
+        flexDirection: 'column',
+        borderRadius: `${config.borderRadius}px`,
+        backgroundColor: '#fff',
+        overflow: 'hidden',
+      }}
+      className="shadow"
+    >
       <Box sx={{ backgroundColor: '#fff' }}>
-        <Box sx={{ p: 2 }}>
+        {title && (
+          <Stack
+            sx={{
+              px: 2,
+              pt: 2,
+            }}
+            direction={'row'}
+            spacing={1}
+          >
+            {titleIcon ? titleIcon : null}
+            <Typography fontWeight={'bold'} fontSize={'1rem'} variant={'h5'}>
+              {title}
+            </Typography>
+          </Stack>
+        )}
+        <Box sx={{ p: 1 }}>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-              columnGap: '15px',
-              rowGap: '15px',
+              columnGap: '5px',
+              rowGap: '5px',
             }}
           >
             {renderProducts()}
           </div>
         </Box>
       </Box>
-    </section>
+    </Box>
   );
 };
 

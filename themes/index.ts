@@ -21,7 +21,7 @@ export const theme = (customization: any) => {
     heading: color.grey900,
     paper: color.paper,
     backgroundDefault: color.paper,
-    background: color.primaryLight,
+    background: '#fff',
     darkTextPrimary: color.grey700,
     darkTextSecondary: color.grey500,
     textDark: color.grey900,

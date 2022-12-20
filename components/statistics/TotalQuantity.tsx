@@ -1,11 +1,11 @@
-import { ITotalGrowth } from '@/interfaces/compontents/statistic.interface';
+import { ITotalQuantity } from '@/interfaces/compontents/statistic.interface';
 import { Box, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const TotalGrowth: React.FunctionComponent<ITotalGrowth> = ({ data }) => {
+const TotalQuantity: React.FunctionComponent<ITotalQuantity> = ({ data }) => {
   const matches = useMediaQuery('(min-width:900px)');
   const create_xaxis_data: any = () => {
     if (!data) return [];
@@ -18,15 +18,15 @@ const TotalGrowth: React.FunctionComponent<ITotalGrowth> = ({ data }) => {
   const create_series: any = () => {
     if (!data) return [];
 
-    let series_data_earning: any = { name: 'Số tiền thu được', data: [] };
-    let series_data_profit: any = { name: 'Lợi nhuận', data: [] };
+    let series_data_quantity: any = { name: 'Số lượng bán ra', data: [] };
+    let series_data_order: any = { name: 'Số lượng đơn hàng', data: [] };
 
     data?.forEach((item: any) => {
-      series_data_earning.data.push(item?.sales);
-      series_data_profit.data.push(item?.profit);
+      series_data_quantity.data.push(item?.quantity);
+      series_data_order.data.push(item?.total_order);
     });
 
-    return [series_data_profit, series_data_earning];
+    return [series_data_quantity, series_data_order];
   };
   const chartInfo = {
     options: {
@@ -58,7 +58,7 @@ const TotalGrowth: React.FunctionComponent<ITotalGrowth> = ({ data }) => {
     >
       <Box>
         <Typography sx={{ fontWeight: 600, color: '#000' }}>
-          Doanh thu
+          Số lượng bán
         </Typography>
       </Box>
       <Chart
@@ -71,4 +71,4 @@ const TotalGrowth: React.FunctionComponent<ITotalGrowth> = ({ data }) => {
   );
 };
 
-export default TotalGrowth;
+export default TotalQuantity;

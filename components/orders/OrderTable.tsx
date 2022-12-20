@@ -29,7 +29,10 @@ const OrderTable: React.FunctionComponent<IOrderTable> = ({ items }) => {
 
   if (!sortedItems || sortedItems?.length === 0) {
     return (
-      <Box sx={{ backgroundColor: '#fff', padding: 2, borderRadius: '8px' }}>
+      <Box
+        className="shadow"
+        sx={{ backgroundColor: '#fff', padding: 4, borderRadius: '8px' }}
+      >
         <EmptyOrder />
       </Box>
     );
@@ -37,7 +40,12 @@ const OrderTable: React.FunctionComponent<IOrderTable> = ({ items }) => {
   return (
     <div>
       {(sortedItems || []).map((row: any) => (
-        <TableContainer component={Paper} key={row.id} sx={{ mb: 2 }}>
+        <TableContainer
+          className="shadow"
+          component={Paper}
+          key={row.id}
+          sx={{ mb: 2 }}
+        >
           <Table sx={{ maxWidth: 1762, marginTop: 0 }}>
             <TableHead>
               <TableRow>

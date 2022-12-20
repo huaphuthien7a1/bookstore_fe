@@ -1,21 +1,17 @@
+import { FC } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 import { makeStyles } from '@mui/styles';
-import { ExtendButtonBase, IconButton, IconButtonTypeMap } from '@mui/material';
-import { useRef, FC } from 'react';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import config from '../../config';
 import ProductCard from '../cards/products/ProductCard';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import PropTypes from 'prop-types';
 import ProductCardSkeleton from '../cards/Skeleton/ProductCardSkelection';
+import { IProductSlides } from '@/interfaces/compontents/product.interface';
+import config from '../../config';
 
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css';
-import { IProductSlides } from '@/interfaces/compontents/product.interface';
 
 const useStyles = makeStyles({
   container: {

@@ -9,10 +9,16 @@ const Cart = () => {
     <ProductLayout hideFooter={true}>
       <Container maxWidth="md" disableGutters>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Paper sx={{ backgroundColor: '#fff', p: { xs: 2, md: 3 }, mb: 2 }}>
+          <Paper
+            className="shadow"
+            sx={{ backgroundColor: '#fff', p: { xs: 2, md: 3 }, mb: 2 }}
+          >
             <CartTitle />
           </Paper>
-          <Paper sx={{ backgroundColor: '#fff', p: { xs: 2, md: 3 } }}>
+          <Paper
+            className="shadow"
+            sx={{ backgroundColor: '#fff', p: { xs: 2, md: 3 } }}
+          >
             <CartItems />
           </Paper>
         </Box>

@@ -53,7 +53,7 @@ const SearchSection = () => {
     if (router?.pathname !== '/product') {
       router.push({ pathname: '/product', query: { search: value } });
     }
-  }, [router]);
+  }, [router, value]);
 
   useEffect(() => {
     const inputRefCurrent = inputRef?.current;
@@ -73,32 +73,50 @@ const SearchSection = () => {
     <>
       <Box
         sx={{
-          width: '100%',
+          with: '100%',
           marginRight: 0.25,
           marginLeft: { xs: 0, md: 1.5 },
+          flex: '1 1 0%',
           display: 'flex',
           justifyContent: 'flex-end',
         }}
       >
-        <OutlineInputStyle
-          ref={inputRef}
-          sx={{ width: matches ? '300px' : '100%' }}
-          id="input-search-header"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Tìm kiếm sản phẩm tại đây"
-          startAdornment={
-            <InputAdornment position="start">
-              <IconSearch
-                stroke={1.5}
-                size="1rem"
-                color={theme.palette.grey[500]}
-              />
-            </InputAdornment>
-          }
-          aria-describedby="search-helper-text"
-          inputProps={{ 'aria-label': 'weight' }}
-        />
+        <Box
+          className="shadow"
+          sx={{
+            width: matches ? 'fit-content' : '100%',
+
+            borderRadius: '8px',
+            '.css-wmrpzn-MuiOutlinedInput-notchedOutline': {
+              border: 'none !important',
+            },
+          }}
+        >
+          {' '}
+          <OutlineInputStyle
+            ref={inputRef}
+            sx={{
+              width: matches ? '300px' : '100%',
+              border: 'none',
+              margin: 0,
+            }}
+            id="input-search-header"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder="Tìm kiếm sản phẩm tại đây"
+            startAdornment={
+              <InputAdornment position="start">
+                <IconSearch
+                  stroke={1.5}
+                  size="1rem"
+                  color={theme.palette.grey[500]}
+                />
+              </InputAdornment>
+            }
+            aria-describedby="search-helper-text"
+            inputProps={{ 'aria-label': 'weight' }}
+          />
+        </Box>
       </Box>
     </>
   );
