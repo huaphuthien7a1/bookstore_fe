@@ -1,33 +1,14 @@
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import ProductCardItem from './ProductCardItem';
-import { makeStyles } from '@mui/styles';
-import config from '../../../config';
 import ProductCardSkeleton from '../Skeleton/ProductCardSkelection';
 import CustomNoRowsOverlay from '../../empty/CustomNoRowsOverlay';
 import { IProductCardItemsByGenre } from '@/interfaces/compontents/card.interface';
 import useGetBookByGenre from '@/hooks/client/useGetBookByGenre';
-
-const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    rowGap: '0.2rem',
-    flexDirection: 'column',
-    borderRadius: `${config.borderRadius}px`,
-    backgroundColor: '#fff',
-    overflow: 'hidden',
-  },
-});
+import config from '../../../config';
 
 const ProductCardItemsByGenre: React.FunctionComponent<
   IProductCardItemsByGenre
-> = ({
-  title,
-  titleIcon,
-  titleBackground = '#fff',
-  slideToShow = 5,
-  genreId = null,
-}) => {
-  const classes = useStyles();
+> = ({ title, titleIcon, slideToShow = 5, genreId = null }) => {
   const { data: dataFiltered, isLoading } = useGetBookByGenre(
     genreId,
     slideToShow,

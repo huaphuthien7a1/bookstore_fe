@@ -9,18 +9,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { styled } from '@mui/material/styles';
 import config from '../../config';
 import MenuActionAdmin from '../../components/menus/MenuActionAdmin';
-import CustomPagination from '../../components/Paginations/CustomPagination';
 import { deleteBook } from '../../apis/product.api';
 import { useDispatch } from 'react-redux';
 import { toggleSnackbar } from '../../store/snackbarReducer';
 import BookModal from '../../components/modals/BookModal';
-import { useMutation, useQueryClient } from 'react-query';
-import {
-  AUTHORS,
-  BOOKS,
-  GENRES,
-  PUBLISHERS,
-} from '../../constants/queryKeyName';
+import { useMutation } from 'react-query';
 import useGetListBook from '../../hooks/useGetListBook';
 import useGetListGenre from '../../hooks/useGetListGenre';
 import useGetListAuthor from '../../hooks/useGetListAuthor';
@@ -37,33 +30,23 @@ const ImageStyle = styled('img')({
 const ProductManagement = () => {
   const dispatch = useDispatch();
   const [searchContent, setSearchContent] = useState<string>('');
-  const [pageSize, setPageSize] = useState<number>(5);
   const [page, setPage] = useState<number>(1);
-  const [selectionModel, setSelectionModel] = useState<any[]>([]);
   const [currentProduct, setCurrentProduct] = useState<{ data: any } | null>(
     null
   );
-  const queryClient = useQueryClient();
-
-  const {
-    data: authorData,
-    isLoading: isAuthorLoading,
-    isFetching: isAuthorFetching,
-  } = useGetListAuthor(1, 100);
-  const {
-    data: publisherData,
-    isLoading: isPublisherLoading,
-    isFetching: isPublisherFetching,
-  } = useGetListPublisher(1, 100);
-  const {
-    data: genreData,
-    isLoading: isGenreLoading,
-    isFetching: isGenreFetching,
-  } = useGetListGenre(1, 100);
+  const { data: authorData, isLoading: isAuthorLoading } = useGetListAuthor(
+    1,
+    100
+  );
+  const { data: publisherData, isLoading: isPublisherLoading } =
+    useGetListPublisher(1, 100);
+  const { data: genreData, isLoading: isGenreLoading } = useGetListGenre(
+    1,
+    100
+  );
   const {
     data: bookData,
     isLoading: isBookLoading,
-    isFetching: isBookFetching,
     refetch,
   } = useGetListBook(page, 5, ['name', 'description'] as any, searchContent);
 
@@ -147,12 +130,7 @@ const ProductManagement = () => {
       width: 100,
       renderCell: (params: any) => <p>{params?.value}đ</p>,
     },
-    {
-      field: 'rating',
-      headerName: 'Đánh giá',
-      description: 'Đánh giá sản phẩm',
-      width: 100,
-    },
+
     {
       field: 'available_quantity',
       headerName: 'Số lượng',
@@ -208,10 +186,6 @@ const ProductManagement = () => {
                 isAuthorLoading ||
                 isGenreLoading ||
                 isPublisherLoading ||
-                isAuthorFetching ||
-                isGenreFetching ||
-                isPublisherFetching ||
-                isBookFetching ||
                 isBookLoading ||
                 isMutateLoading
               }
@@ -252,9 +226,9 @@ const ProductManagement = () => {
               disableSelectionOnClick
               rowHeight={100}
               disableColumnMenu
-              loading={isBookLoading || isMutateLoading || isBookFetching}
+              loading={isBookLoading || isMutateLoading}
               columns={columns}
-              rows={isBookLoading || isBookFetching ? [] : bookData?.data}
+              rows={isBookLoading ? [] : bookData?.data}
               components={{
                 NoRowsOverlay: CustomNoRowsOverlay,
                 LoadingOverlay: LinearProgress,

@@ -56,7 +56,7 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
       spacing={{ xs: 1, md: 2 }}
       sx={{ pt: '0 !important', pr: '0 !important', pl: '0 !important' }}
     >
-      <Box className="shadow" sx={{ borderRadius: '8px', py: 2 }}>
+      <Box className="shadow" sx={{ borderRadius: '8px', py: 2, px: 2 }}>
         <Box
           sx={{
             width: { xs: '100%', md: '300px' },
@@ -77,7 +77,7 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
               height={500}
               src={data?.book_image || ''}
               alt={data?.name}
-              style={{ borderRadius: '10px' }}
+              style={{ borderRadius: '8px' }}
             />
           )}
         </Box>

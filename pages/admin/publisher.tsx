@@ -8,11 +8,11 @@ import CustomNoRowsOverlay from '../../components/empty/CustomNoRowsOverlay';
 import AddIcon from '@mui/icons-material/Add';
 import config from '../../config';
 import MenuActionAdmin from '../../components/menus/MenuActionAdmin';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleSnackbar } from '../../store/snackbarReducer';
 import PublisherModal from '../../components/modals/PublisherModal';
-import { getAllPublisher, deletePublisher } from '../../apis/publisher.api';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { deletePublisher } from '../../apis/publisher.api';
+import { useMutation, useQueryClient } from 'react-query';
 import { PUBLISHERS } from '../../constants/queryKeyName';
 import useGetListPublisher from '../../hooks/useGetListPublisher';
 import AdminLayout from '../../layout/AdminLayout';
@@ -22,7 +22,7 @@ const PublisherManagement = () => {
   const [searchContent, setSearchContent] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const [currentProduct, setCurrentProduct] = useState<any>(null);
-  const { data, isLoading, isFetching, refetch } = useGetListPublisher(
+  const { data, isLoading, refetch } = useGetListPublisher(
     page,
     10,
     ['name', 'description'] as any,
@@ -128,7 +128,7 @@ const PublisherManagement = () => {
             setPage={setPage}
           />
           <Button
-            disabled={isLoading || isFetching}
+            disabled={isLoading}
             variant="contained"
             sx={{
               width: { xs: '100%', sm: '18rem' },
@@ -161,9 +161,9 @@ const PublisherManagement = () => {
             disableSelectionOnClick
             autoHeight
             disableColumnMenu
-            loading={isLoading || isFetching || isMutateLoading}
+            loading={isLoading || isMutateLoading}
             columns={columns}
-            rows={isLoading || isFetching ? [] : data?.data}
+            rows={isLoading ? [] : data?.data}
             components={{
               NoRowsOverlay: CustomNoRowsOverlay,
               LoadingOverlay: LinearProgress,

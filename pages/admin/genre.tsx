@@ -8,11 +8,11 @@ import CustomNoRowsOverlay from '../../components/empty/CustomNoRowsOverlay';
 import AddIcon from '@mui/icons-material/Add';
 import config from '../../config';
 import MenuActionAdmin from '../../components/menus/MenuActionAdmin';
-import { deleteGenre, getAllGenre } from '../../apis/genre.api';
+import { deleteGenre } from '../../apis/genre.api';
 import GenreModal from '../../components/modals/GenreModal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleSnackbar } from '../../store/snackbarReducer';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { GENRES } from '../../constants/queryKeyName';
 import useGetListGenre from '../../hooks/useGetListGenre';
 import AdminLayout from '../../layout/AdminLayout';
@@ -116,7 +116,7 @@ const GenreManagement = () => {
               setPage={setPage}
             />
             <Button
-              disabled={isLoading || isFetching}
+              disabled={isLoading}
               variant="contained"
               sx={{
                 width: { xs: '100%', sm: '18rem' },
@@ -149,9 +149,9 @@ const GenreManagement = () => {
               disableSelectionOnClick
               autoHeight
               disableColumnMenu
-              loading={isLoading || isFetching || isMutateLoading}
+              loading={isLoading || isMutateLoading}
               columns={columns}
-              rows={isLoading || isFetching ? [] : data?.data}
+              rows={isLoading ? [] : data?.data}
               components={{
                 NoRowsOverlay: CustomNoRowsOverlay,
                 LoadingOverlay: LinearProgress,

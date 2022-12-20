@@ -1,39 +1,42 @@
-import { useState, useEffect, useCallback } from 'react';
-import {
-  Box,
-  Button,
-  Chip,
-  Pagination,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { useState, useCallback } from 'react';
+import { Box, Pagination, Stack } from '@mui/material';
 import MainCard from '../../components/cards/MainCard';
 import SearchAdminSection from '../../components/Header/SearchSection/SearchAdmin';
 import { DataGrid } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import CustomNoRowsOverlay from '../../components/empty/CustomNoRowsOverlay';
-import AddIcon from '@mui/icons-material/Add';
 import { styled } from '@mui/material/styles';
 import config from '../../config';
 import MenuActionAdmin from '../../components/menus/MenuActionAdmin';
 import CustomChip from '../../components/chip/CustomChip';
 import AdminLayout from '../../layout/AdminLayout';
 import useGetListUser from '@/hooks/useGetListUser';
+import { useMutation } from 'react-query';
+import { activeUser, unactiveUser } from '@/apis/user.api';
+import { useDispatch } from 'react-redux';
+import { useToast } from '@/hooks/useToast';
+import { toggleSnackbar } from '@/store/snackbarReducer';
+import Switch from '@mui/material/Switch';
+
 const ImageStyle = styled('img')({
   width: '80%',
   borderRadius: 4,
   objectFit: 'cover',
 });
+
 const UserManagement = () => {
+  const dispatch = useDispatch();
+  const toast = useToast(dispatch, toggleSnackbar);
   const [currentProduct, setCurrentProduct] = useState<any>(null);
   const [searchContent, setSearchContent] = useState<string>('');
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading, isFetching, refetch } = useGetListUser(
+  const { data, isLoading, refetch } = useGetListUser(
     page,
     10,
     ['name', 'description'] as any,
     searchContent
   );
+  console.log('data', data?.data);
   const deleteProduct = useCallback((id: any) => () => {}, []);
   const toggleModalEdit = useCallback((product: any) => {
     setCurrentProduct(product);
@@ -41,6 +44,35 @@ const UserManagement = () => {
   const handleCloseProductModal = useCallback(() => {
     setCurrentProduct(null);
   }, []);
+
+  const { mutate: activeUserFunc } = useMutation(
+    (data: { user_id: number }) => activeUser(data),
+    {
+      onError: () => {
+        toast({
+          type: 'error',
+          message: 'Xảy ra lỗi trong quá trình chuyển trạng thái',
+        });
+      },
+      onSuccess: () => {
+        refetch();
+      },
+    }
+  );
+  const { mutate: unactiveUserFunc } = useMutation(
+    (data: { user_id: number }) => unactiveUser(data),
+    {
+      onError: () => {
+        toast({
+          type: 'error',
+          message: 'Xảy ra lỗi trong quá trình chuyển trạng thái',
+        });
+      },
+      onSuccess: () => {
+        refetch();
+      },
+    }
+  );
   const columns = [
     { field: 'id', headerName: 'ID', description: 'ID', width: 50 },
     {
@@ -71,7 +103,29 @@ const UserManagement = () => {
         );
       },
     },
-
+    {
+      field: 'is_active',
+      width: 100,
+      description: 'Trạng thái của user',
+      headerName: 'Trạng thái',
+      renderCell: (params: any) => {
+        return (
+          <Box>
+            <Switch
+              checked={params?.row?.is_active}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                if (event.target.checked) {
+                  activeUserFunc({ user_id: params?.row?.id });
+                } else {
+                  unactiveUserFunc({ user_id: params?.row?.id });
+                }
+              }}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+          </Box>
+        );
+      },
+    },
     {
       field: 'actions',
 
@@ -121,9 +175,9 @@ const UserManagement = () => {
               disableSelectionOnClick
               autoHeight
               disableColumnMenu
-              loading={isLoading || isFetching}
+              loading={isLoading}
               columns={columns}
-              rows={isLoading || isFetching ? [] : data?.data}
+              rows={isLoading ? [] : data?.data}
               components={{
                 NoRowsOverlay: CustomNoRowsOverlay,
                 LoadingOverlay: LinearProgress,

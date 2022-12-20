@@ -23,3 +23,9 @@ export const getUserForAdmin = async (
     )}`
   );
 };
+export const activeUser = async (data: any) => {
+  return httpRequest.put('/admin/users/active', data);
+};
+export const unactiveUser = async (data: any) => {
+  return httpRequest.put('/admin/users/unactive', data);
+};
