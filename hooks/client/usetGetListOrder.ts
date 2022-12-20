@@ -6,6 +6,8 @@ const useGetListOrder = () => {
   const getListQuery: any = useQuery(ORDERS, () => getOrderOfClient(), {
     refetchOnMount: true,
     keepPreviousData: true,
+    retry: 3,
+    retryDelay: 3000,
   });
 
   return getListQuery;
