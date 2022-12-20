@@ -18,6 +18,7 @@ import Image from 'next/image';
 import { IProductInfo } from '@/interfaces/compontents/product.interface';
 import { CART_CLIENT } from '@/constants/queryKeyName';
 import { useRouter } from 'next/router';
+import { moneyFormat } from '@/utils/moneyFormat';
 
 const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
   const queryClient = useQueryClient();
@@ -111,7 +112,7 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
             <Typography
               sx={{ fontSize: '32px', color: '#000', fontWeight: 500 }}
             >
-              {data?.price} đ
+              {moneyFormat(data?.price)} đ
             </Typography>
           </Grid>
           <Grid
