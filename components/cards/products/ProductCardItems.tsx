@@ -39,16 +39,12 @@ const ProductCardItems: React.FunctionComponent<IProductCardItems> = ({
       })
     : [];
   const renderProducts = () => {
-    if (isLoading)
-      return (
-        <>
-          <ProductCardSkeleton />
-          <ProductCardSkeleton />
-          <ProductCardSkeleton />
-          <ProductCardSkeleton />
-          <ProductCardSkeleton />
-        </>
+    if (isLoading) {
+      // create a array with n elements and map them
+      return Array.from(Array(slideToShow).keys()).map(
+        (item: any, _index: number) => <ProductCardSkeleton key={_index} />
       );
+    }
 
     return dataFiltered?.length > 0 ? (
       dataFiltered.slice(0, slideToShow).map((product: any, index: number) => {
