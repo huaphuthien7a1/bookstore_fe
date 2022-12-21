@@ -1,14 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductLayout from '@/layout/ProductLayot';
 import { Box, Container, Paper } from '@mui/material';
 import OrderTitle from '@/components/orders/OrderTitle';
 import OrderTable from '@/components/orders/OrderTable';
-import useGetListOrder from '@/hooks/client/usetGetListOrder';
 import LinearProgress from '@mui/material/LinearProgress';
+import { useMutation } from 'react-query';
+import { getOrderOfClient } from '@/apis/order.api';
+import { useDispatch } from 'react-redux';
+import { useToast } from '@/hooks/useToast';
+import { toggleSnackbar } from '@/store/snackbarReducer';
 
 const OrdersHistory = () => {
+  const dispatch = useDispatch();
+  const toast = useToast(dispatch, toggleSnackbar);
+  const [data, setData] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading } = useGetListOrder(page, 10);
+
+  const { mutate: fetchOrder, isLoading: isFetchingOrder } = useMutation(
+    (data: { per_page: number; current_page: number }) =>
+      getOrderOfClient(data),
+    {
+      onSuccess: (data: any) => {
+        setData(data);
+      },
+      onError: () => {
+        toast({
+          type: 'error',
+          message: 'Xảy ra lỗi trong quá trình lấy đơn hàng',
+        });
+      },
+    }
+  );
+
+  useEffect(() => {
+    fetchOrder({ per_page: 10, current_page: page });
+  }, [page]);
+
   return (
     <ProductLayout>
       <Container maxWidth="md" disableGutters>
@@ -24,7 +51,7 @@ const OrdersHistory = () => {
           >
             <OrderTitle />
           </Paper>
-          {isLoading ? (
+          {isFetchingOrder ? (
             <LinearProgress />
           ) : (
             <OrderTable

@@ -111,7 +111,7 @@ const ProductCard: React.FunctionComponent<IProductCard> = ({
       >
         <Image
           style={{ objectFit: 'contain', padding: '1rem 0', cursor: 'pointer' }}
-          src={product?.book_image}
+          src={product?.book_image || '/img/product-not-found.png'}
           quality={75}
           width={150}
           height={slideMode ? 150 : 200}
