@@ -112,7 +112,7 @@ const ItemTableMobile: FC<IItemTableMobile> = ({
                       fontWeight="bold"
                       color="#ee4d2d"
                     >
-                      {moneyFormat(item.price)} đ
+                      {moneyFormat(item.price)}
                     </Typography>
                     <QuantityButton
                       currentQuantity={item?.quantity}

@@ -21,6 +21,7 @@ import useGetListCart from '@/hooks/client/useGetListCart';
 import BelowSection from './BelowSection';
 import GenreSection from './GenreSection';
 import { useRouter } from 'next/router';
+import { scrollToTop } from '@/utils/scrollToTop';
 
 const Header: FC<IHeader> = ({
   handleLeftDrawerToggle,
@@ -118,10 +119,13 @@ const Header: FC<IHeader> = ({
                 width: 'fit-content',
               }}
             >
-              {' '}
               <Typography
                 onClick={() => {
-                  router?.pathname !== '/' && router.push({ pathname: '/' });
+                  if (router?.pathname === '/') {
+                    scrollToTop();
+                  } else {
+                    router.push({ pathname: '/' });
+                  }
                 }}
                 sx={{
                   cursor: 'pointer',
@@ -135,6 +139,38 @@ const Header: FC<IHeader> = ({
                 Trang chủ
               </Typography>
               <GenreSection />
+              <Typography
+                onClick={() => {
+                  router.push({ pathname: '/contact-us' });
+                }}
+                sx={{
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  fontWeight: 400,
+                  marginRight: 1,
+                  whiteSpace: 'nowrap',
+                  color: 'rgb(29,37,69)',
+                  ml: '20px',
+                }}
+              >
+                Liên hệ
+              </Typography>
+              <Typography
+                onClick={() => {
+                  router.push({ pathname: '/about-us' });
+                }}
+                sx={{
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  fontWeight: 400,
+                  marginRight: 1,
+                  whiteSpace: 'nowrap',
+                  color: 'rgb(29,37,69)',
+                  ml: '15px',
+                }}
+              >
+                Giới thiệu
+              </Typography>
             </Box>
           )}
 

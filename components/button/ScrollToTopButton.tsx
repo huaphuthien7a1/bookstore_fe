@@ -1,6 +1,7 @@
 import { Button, Fab } from '@mui/material';
 import { useEffect, useState, useCallback, memo } from 'react';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { scrollToTop } from '@/utils/scrollToTop';
 
 const ScrollToTopButton: React.FunctionComponent = () => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -13,12 +14,6 @@ const ScrollToTopButton: React.FunctionComponent = () => {
       visible && setVisible(false);
     }
   }, [visible]);
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   useEffect(() => {
     window.addEventListener('scroll', toggleVisible);

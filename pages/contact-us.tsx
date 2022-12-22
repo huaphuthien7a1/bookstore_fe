@@ -49,10 +49,11 @@ const ContactUs = () => {
               margin: '0 auto',
               maxWidth: 800,
             }}
+            className="shadow"
           >
             <CardContent
               style={{
-                padding: '20px',
+                padding: '25px',
               }}
             >
               <Stack

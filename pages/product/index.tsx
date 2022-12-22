@@ -227,7 +227,6 @@ const Product = () => {
             onClose={() => setOpenFilter(false)}
             sx={{
               zIndex: 0,
-
               '& .MuiDrawer-paper': {
                 mt: matches ? '25px' : '80px',
                 borderRadius: matches ? '8px' : '0',

@@ -24,6 +24,18 @@ class AuthService {
   getAccessToken = () => cookie.get('accessToken') || '';
 
   isAuthenticated = () => !!this.getAccessToken() && !!this.getUser();
+
+  isAdmin = () => {
+    const user: any = this.getUser();
+    if (user?.roles?.includes('Admin')) return true;
+    return false;
+  };
+
+  isManger = () => {
+    const user: any = this.getUser();
+    if (user?.roles?.includes('Manager')) return true;
+    return false;
+  };
 }
 
 const authService = new AuthService();

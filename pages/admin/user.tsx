@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { useToast } from '@/hooks/useToast';
 import { toggleSnackbar } from '@/store/snackbarReducer';
 import Switch from '@mui/material/Switch';
+import UserModal from '@/components/modals/UserModal';
 
 const ImageStyle = styled('img')({
   width: '80%',
@@ -27,7 +28,7 @@ const ImageStyle = styled('img')({
 const UserManagement = () => {
   const dispatch = useDispatch();
   const toast = useToast(dispatch, toggleSnackbar);
-  const [currentProduct, setCurrentProduct] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
   const [searchContent, setSearchContent] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const { data, isLoading, refetch } = useGetListUser(
@@ -37,16 +38,13 @@ const UserManagement = () => {
     searchContent
   );
   console.log('data', data?.data);
-  const deleteProduct = useCallback((id: any) => () => {}, []);
-  const toggleModalEdit = useCallback((product: any) => {
-    setCurrentProduct(product);
-  }, []);
-  const handleCloseProductModal = useCallback(() => {
-    setCurrentProduct(null);
+  const deleteUser = useCallback((id: any) => () => {}, []);
+  const toggleModalEdit = useCallback((user: any) => {
+    setCurrentUser({ data: user });
   }, []);
 
   const { mutate: activeUserFunc } = useMutation(
-    (data: { user_id: number }) => activeUser(data),
+    (data: { user_id: number; role_id: number }) => activeUser(data),
     {
       onError: () => {
         toast({
@@ -60,7 +58,7 @@ const UserManagement = () => {
     }
   );
   const { mutate: unactiveUserFunc } = useMutation(
-    (data: { user_id: number }) => unactiveUser(data),
+    (data: { user_id: number; role_id: number }) => unactiveUser(data),
     {
       onError: () => {
         toast({
@@ -113,11 +111,12 @@ const UserManagement = () => {
           <Box>
             <Switch
               checked={params?.row?.is_active}
+              disabled={params?.row?.roles?.includes('Admin')}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 if (event.target.checked) {
-                  activeUserFunc({ user_id: params?.row?.id });
+                  activeUserFunc({ user_id: params?.row?.id, role_id: 1 });
                 } else {
-                  unactiveUserFunc({ user_id: params?.row?.id });
+                  unactiveUserFunc({ user_id: params?.row?.id, role_id: 1 });
                 }
               }}
               inputProps={{ 'aria-label': 'controlled' }}
@@ -138,7 +137,7 @@ const UserManagement = () => {
           <MenuActionAdmin
             userMode={true}
             id={params?.row?.id}
-            deleteCallback={() => deleteProduct(params?.row?.id)}
+            deleteCallback={() => deleteUser(params?.row?.id)}
             editCallback={() => toggleModalEdit(params?.row)}
           />
         );
@@ -201,6 +200,12 @@ const UserManagement = () => {
           </Box>
         </MainCard>
       </>
+      <UserModal
+        open={currentUser !== null}
+        currentProduct={currentUser}
+        handleClose={() => setCurrentUser(null)}
+        refetchAfterClose={refetch}
+      />
     </AdminLayout>
   );
 };

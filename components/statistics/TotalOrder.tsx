@@ -24,7 +24,7 @@ const TotalOrder: React.FunctionComponent<ITotalOrder> = ({ data }) => {
       }}
     >
       <Typography sx={{ fontWeight: 600, color: '#000' }}>
-        {moneyFormat(calcTotalEarning())} quyển
+        {calcTotalEarning()} quyển
       </Typography>
       <Typography sx={{ fontWeight: 600, color: 'rgba(0,0,0,0.5)' }}>
         Số sách bán ra

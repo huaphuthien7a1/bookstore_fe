@@ -147,7 +147,7 @@ const ItemTable: React.FunctionComponent<IItemTable> = ({
                             fontWeight="600"
                             color="#ee4d2d"
                           >
-                            {moneyFormat(row?.price)} đ
+                            {moneyFormat(row?.price)}
                           </Typography>
                         </Stack>
                       </Box>
@@ -175,7 +175,7 @@ const ItemTable: React.FunctionComponent<IItemTable> = ({
                       fontWeight="bold"
                       textAlign={addressMode ? 'left' : 'center'}
                     >
-                      {moneyFormat(row.price * row?.quantity)} đ
+                      {moneyFormat(row.price * row?.quantity)}
                     </Typography>
                   </TableCell>
                   {!addressMode && (

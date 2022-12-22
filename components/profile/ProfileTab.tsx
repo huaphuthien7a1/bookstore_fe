@@ -55,7 +55,7 @@ const ProfileTab: React.FunctionComponent = () => {
   );
 
   const handleSave = () => {
-    if (values?.phone?.match(/\d/g).length === 10) {
+    if (!values?.phone?.match(/\d/g) && values?.phone?.length !== 10) {
       toast({ type: 'info', message: 'Số điện thoại phải đúng định dạng' });
       return;
     }
@@ -77,13 +77,16 @@ const ProfileTab: React.FunctionComponent = () => {
   };
   const handlePreviewAvatar = (e: any) => {
     const file = e.target.files[0];
-    if (file?.size / 1024 > 2) {
+    if (file?.size / 1048576 > 2) {
       toast({
         type: 'info',
-        message: 'Dung lượng hình ảnh tối đa là 2Mb, vui lòng chọn ảnh khác',
+        message:
+          'Dung lượng hình ảnh tối đa là 2Mb, vui lòng chọn ảnh khác' +
+          file?.size,
       });
       return;
     }
+    // URL.revokeObjectURL(previewAvatar);
     setPreviewAvatar(URL.createObjectURL(file));
     setValues((prevValue: any) => ({
       ...prevValue,

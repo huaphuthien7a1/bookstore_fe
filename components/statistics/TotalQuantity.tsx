@@ -64,7 +64,7 @@ const TotalQuantity: React.FunctionComponent<ITotalQuantity> = ({ data }) => {
       <Chart
         options={chartInfo.options as any}
         series={chartInfo.series}
-        type="area"
+        type="bar"
         width={matches ? 900 : 600}
       />
     </Box>

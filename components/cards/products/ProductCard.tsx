@@ -85,7 +85,7 @@ const ProductCard: React.FunctionComponent<IProductCard> = ({
         type: 'info',
         message: 'Đăng nhập để thêm sản phẩm vào vỏ hàng',
       });
-      router.push('/login');
+      router.push({ pathname: '/login' });
     }
   }, [addToCartFunc, router, toast]);
 
@@ -161,7 +161,7 @@ const ProductCard: React.FunctionComponent<IProductCard> = ({
                   color="#000"
                   fontSize="16px"
                 >
-                  {moneyFormat(product?.price)} đ
+                  {moneyFormat(product?.price)}
                 </Typography>
                 <LoadingButton
                   loading={isLoadingAddToCart}

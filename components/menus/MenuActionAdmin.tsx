@@ -47,30 +47,31 @@ const MenuActionAdmin: FC<IMenuActionAdmin> = ({
           'aria-labelledby': `action-button-${id}`,
         }}
       >
-        <MenuItem
-          onClick={() => {
-            deleteCallback();
-            handleClose();
-          }}
-        >
-          <Stack direction="row" spacing={1} alignItems="center">
-            <DeleteIcon fontSize="inherit" />
-            <Typography>Xóa</Typography>
-          </Stack>
-        </MenuItem>
         {!userMode && (
           <MenuItem
             onClick={() => {
-              editCallback();
+              deleteCallback();
               handleClose();
             }}
           >
             <Stack direction="row" spacing={1} alignItems="center">
-              <EditIcon fontSize="inherit" />
-              <Typography>Chỉnh sửa</Typography>
+              <DeleteIcon fontSize="inherit" />
+              <Typography>Xóa</Typography>
             </Stack>
           </MenuItem>
         )}
+
+        <MenuItem
+          onClick={() => {
+            editCallback();
+            handleClose();
+          }}
+        >
+          <Stack direction="row" spacing={1} alignItems="center">
+            <EditIcon fontSize="inherit" />
+            <Typography>Chỉnh sửa</Typography>
+          </Stack>
+        </MenuItem>
       </Menu>
     </div>
   );

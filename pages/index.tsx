@@ -37,6 +37,7 @@ const Home = () => {
         maxWidth="lg"
         sx={{
           display: { xs: 'none', sm: 'block' },
+
           pt: 2,
           pb: 1,
           px: {
@@ -53,6 +54,7 @@ const Home = () => {
         sx={{
           px: { xs: '8px', md: '16px' },
           pb: 1,
+          mb: { xs: 2, md: 4 },
         }}
       >
         <Box

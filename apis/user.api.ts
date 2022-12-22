@@ -29,3 +29,9 @@ export const activeUser = async (data: any) => {
 export const unactiveUser = async (data: any) => {
   return httpRequest.put('/admin/users/unactive', data);
 };
+export const assignRole = async (data: any) => {
+  return httpRequest.post('/admin/users/assign-role', data);
+};
+export const removeRole = async (data: any) => {
+  return httpRequest.put('/admin/users/remove-role', data);
+};

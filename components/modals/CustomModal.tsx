@@ -21,7 +21,7 @@ const CustomModal: FC<ICustomModal> = ({
 }) => {
   const matches = useMediaQuery('(min-width:768px)');
   return matches ? (
-    <Dialog onClose={() => handleClose()} open={open}>
+    <Dialog fullWidth maxWidth="sm" onClose={() => handleClose()} open={open}>
       <Stack
         direction="column"
         sx={{ paddingLeft: 2, paddingRight: 2, paddingBottom: 2 }}

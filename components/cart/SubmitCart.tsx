@@ -84,7 +84,7 @@ const SubmitCart: React.FunctionComponent<ISubmitCart> = ({
                 <Typography
                   sx={{ fontWeight: 500, fontSize: '16px', color: '#000' }}
                 >
-                  {moneyFormat(defaultAddress?.value) || 0} đ
+                  {moneyFormat(defaultAddress?.value) || 0}
                 </Typography>
               </Stack>
             )}
@@ -108,8 +108,7 @@ const SubmitCart: React.FunctionComponent<ISubmitCart> = ({
                         0
                       ) + ((currentIndex === 1 && defaultAddress?.value) || 0)
                     )
-                  : 0}{' '}
-                đ
+                  : 0}
               </Typography>
             </Stack>
           </Stack>

@@ -131,8 +131,7 @@ const OrderTable: React.FunctionComponent<IOrderTable> = ({
                         {moneyFormat(
                           (row?.payment?.total || 0) -
                             (calcTotalBookPrice(row) || 0)
-                        )}{' '}
-                        đ
+                        )}
                       </Typography>
                     </Stack>
                   </TableCell>

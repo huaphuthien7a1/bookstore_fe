@@ -16,12 +16,12 @@ const CardMember = () => {
     <>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card
+          className="shadow"
           variant="outlined"
           sx={{
             maxWidth: 300,
-            height: 500,
+
             borderWidth: 1,
-            borderColor: '#2196f3',
           }}
         >
           <CardMedia
@@ -30,26 +30,16 @@ const CardMember = () => {
             height="300"
             title="Phú"
           />
-          <CardContent>
-            <Typography gutterBottom variant="h4">
-              Huỳnh Gia Phú - 20521752 &#40;nhóm trưởng&#41;
-            </Typography>
-            <Typography variant="h5">
-              <strong>Team: </strong>Back-end <br />
-              <strong>Nhiệm vụ: </strong>Phân chia công việc, lập kế hoạch, quản
-              lý tài liệu dự án, lập trình API, Controller, Middleware.
-            </Typography>
-          </CardContent>
         </Card>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card
+          className="shadow"
           variant="outlined"
           sx={{
             maxWidth: 300,
-            height: 500,
+
             borderWidth: 1,
-            borderColor: '#2196f3',
           }}
         >
           <CardMedia
@@ -58,23 +48,9 @@ const CardMember = () => {
             height="300"
             title="Thiên"
           />
-
-          <CardContent>
-            <Typography gutterBottom variant="h4">
-              Hứa Phú Thiên - 20521946
-            </Typography>
-            <br />
-            <Typography variant="h5">
-              <strong>Team: </strong>Front-end
-              <br />
-              <strong>Nhiệm vụ: </strong>Thiết kế, dựng layout giao diện, khởi
-              tạo source dự án, handle logic, integrate API, deploy website,
-              SEO, responsive.
-            </Typography>
-          </CardContent>
         </Card>
       </Grid>{' '}
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      {/* <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card
           variant="outlined"
           sx={{
@@ -104,8 +80,8 @@ const CardMember = () => {
             </Typography>
           </CardContent>
         </Card>
-      </Grid>{' '}
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      </Grid>{' '} */}
+      {/* <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card
           variant="outlined"
           sx={{
@@ -133,8 +109,8 @@ const CardMember = () => {
             </Typography>
           </CardContent>
         </Card>
-      </Grid>{' '}
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      </Grid>{' '} */}
+      {/* <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card
           variant="outlined"
           sx={{
@@ -162,15 +138,15 @@ const CardMember = () => {
             </Typography>
           </CardContent>
         </Card>
-      </Grid>{' '}
+      </Grid>{' '} */}
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card
           variant="outlined"
+          className="shadow"
           sx={{
             maxWidth: 300,
-            height: 500,
+
             borderWidth: 1,
-            borderColor: '#2196f3',
           }}
         >
           <CardMedia
@@ -179,29 +155,16 @@ const CardMember = () => {
             height="300"
             title="Nhựt Long"
           />
-          <CardContent>
-            <Typography gutterBottom variant="h4">
-              Châu Nhựt Long - 20520238
-            </Typography>
-            <br />
-            <Typography variant="h5">
-              <strong>Team: </strong>Back-end
-              <br />
-              <strong>Nhiệm vụ: </strong> Phân tích thiết kế hệ thống, xác định
-              chức năng, khởi tạo source BE, tạo dựng Database, lập trình API,
-              Middleware.
-            </Typography>
-          </CardContent>
         </Card>
       </Grid>{' '}
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card
           variant="outlined"
+          className="shadow"
           sx={{
             maxWidth: 300,
-            height: 500,
+
             borderWidth: 1,
-            borderColor: '#2196f3',
           }}
         >
           <CardMedia
@@ -210,18 +173,6 @@ const CardMember = () => {
             height="300"
             title="Tấn Lộc"
           />
-          <CardContent>
-            <Typography gutterBottom variant="h4">
-              Lê Tấn Lộc - 20520235
-            </Typography>
-            <br />
-            <Typography variant="h5">
-              <strong>Team: </strong>Back-end
-              <br />
-              <strong>Nhiệm vụ: </strong> Lập trình Controller, API, vẽ usecase,
-              tạo dataset, kiểm thử lỗi.
-            </Typography>
-          </CardContent>
         </Card>
       </Grid>{' '}
     </>

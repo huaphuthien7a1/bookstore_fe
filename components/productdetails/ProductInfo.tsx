@@ -19,6 +19,7 @@ import { IProductInfo } from '@/interfaces/compontents/product.interface';
 import { CART_CLIENT } from '@/constants/queryKeyName';
 import { useRouter } from 'next/router';
 import { moneyFormat } from '@/utils/moneyFormat';
+import authService from '@/services/authService';
 
 const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
   const queryClient = useQueryClient();
@@ -50,7 +51,6 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
       },
     }
   );
-
   return (
     <Stack
       direction={{ xs: 'column', md: 'row' }}
@@ -112,7 +112,7 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
             <Typography
               sx={{ fontSize: '32px', color: '#000', fontWeight: 500 }}
             >
-              {moneyFormat(data?.price)} đ
+              {moneyFormat(data?.price || 0)}
             </Typography>
           </Grid>
           <Grid
@@ -126,7 +126,15 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
             >
               <LoadingButton
                 onClick={() => {
-                  addToCartFunc();
+                  if (authService.isAuthenticated()) {
+                    addToCartFunc();
+                  } else {
+                    toast({
+                      type: 'info',
+                      message: 'Đăng nhập để thêm sản phẩm vào vỏ hàng',
+                    });
+                    router.push({ pathname: '/login' });
+                  }
                 }}
                 loading={isLoadingAddToCart}
                 variant="contained"
@@ -144,7 +152,15 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
               <Button
                 variant="contained"
                 onClick={() => {
-                  router.push({ pathname: '/cart' });
+                  if (authService.isAuthenticated()) {
+                    router.push({ pathname: '/cart' });
+                  } else {
+                    toast({
+                      type: 'info',
+                      message: 'Đăng nhập để thêm sản phẩm vào vỏ hàng',
+                    });
+                    router.push({ pathname: '/login' });
+                  }
                 }}
               >
                 Mua ngay

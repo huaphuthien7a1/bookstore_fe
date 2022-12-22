@@ -24,7 +24,7 @@ const TotalEarning: React.FunctionComponent<ITotalEarning> = ({ data }) => {
       }}
     >
       <Typography sx={{ fontWeight: 600, color: '#000' }}>
-        {moneyFormat(calcTotalEarning())} đ
+        {moneyFormat(calcTotalEarning())}
       </Typography>
       <Typography sx={{ fontWeight: 600, color: 'rgba(0,0,0,0.5)' }}>
         Số tiền thu được
