@@ -155,6 +155,17 @@ const ProfileSection: React.FunctionComponent = () => {
         ) : (
           <MenuList>
             <ListItemButton
+              selected={router.pathname.includes('/orders')}
+              onClick={() => handleListItemClick('/orders')}
+            >
+              <ListItemIcon>
+                <IconReceipt stroke={1.5} size="1.3rem" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Đơn hàng</Typography>}
+              />
+            </ListItemButton>
+            <ListItemButton
               selected={router.pathname.includes('/profile')}
               onClick={() => handleListItemClick('/profile')}
             >

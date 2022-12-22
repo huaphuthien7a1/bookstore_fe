@@ -196,7 +196,7 @@ const Product = () => {
             <ProductCardItems
               isLoading={isGetingListFilterBook}
               data={listBook || []}
-              slideToShow={10}
+              slideToShow={12}
             />
             <Box
               sx={{
