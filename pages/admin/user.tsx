@@ -37,7 +37,6 @@ const UserManagement = () => {
     ['name', 'description'] as any,
     searchContent
   );
-  console.log('data', data?.data);
   const deleteUser = useCallback((id: any) => () => {}, []);
   const toggleModalEdit = useCallback((user: any) => {
     setCurrentUser({ data: user });

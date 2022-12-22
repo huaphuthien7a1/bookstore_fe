@@ -16,7 +16,6 @@ import {
   OutlinedInput,
   Stack,
   Typography,
-  useMediaQuery,
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -30,10 +29,12 @@ import checkIsAdminOrManager from '../../common/checkIsAdminOrManager';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { LoadingButton } from '@mui/lab';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const AuthLoginForm = ({ ...others }: { [others: string]: unknown }) => {
   const theme: any = useTheme();
   const router = useRouter();
+  const matches = useMediaQuery('(min-width:400px)');
 
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
   const [checked, setChecked] = useState(true);
@@ -263,8 +264,8 @@ const AuthLoginForm = ({ ...others }: { [others: string]: unknown }) => {
               )}
             </FormControl>
             <Stack
-              direction="row"
-              alignItems="center"
+              direction={matches ? 'row' : 'column'}
+              alignItems={matches ? 'center' : 'flex-start'}
               justifyContent="space-between"
               spacing={1}
             >
@@ -283,7 +284,13 @@ const AuthLoginForm = ({ ...others }: { [others: string]: unknown }) => {
                 onClick={() => router.push('/forgot-password')}
                 variant="subtitle1"
                 color="secondary"
-                sx={{ textDecoration: 'none', cursor: 'pointer' }}
+                sx={{
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  fontWeight: 500,
+                  width: !matches ? '100% !important' : 'fit-content',
+                  textAlign: 'right',
+                }}
               >
                 Quên mật khẩu
               </Typography>
