@@ -3,9 +3,9 @@ import { Navigation, Pagination, Autoplay } from 'swiper';
 import { makeStyles } from '@mui/styles';
 import config from '../../config';
 import Image from 'next/image';
-import Carousel1 from '@/public/img/carousel_1.png';
+import Carousel1 from '@/public/img/carousel_1.jpg';
 import Carousel2 from '@/public/img/carousel_2.png';
-import Carousel3 from '@/public/img/carousel_3.png';
+import Carousel3 from '@/public/img/carousel_3.jpg';
 
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
