@@ -65,8 +65,8 @@ const AuthorManagement = () => {
     { field: 'id', headerName: 'ID', description: 'ID sản phẩm', width: 50 },
     {
       field: 'name',
-      headerName: 'Tên sản phẩm',
-      description: 'Tên sản phẩm',
+      headerName: 'Tên tác giả',
+      description: 'Tên tác giả',
       flex: 1,
     },
     {
