@@ -76,7 +76,7 @@ const aboutUs = () => {
               variant="h5"
               style={{ fontSize: matches ? 16 : 18, lineHeight: 1.5 }}
             >
-              Nhóm bao gồm 7 thành viên với vị trí và nhiệm vụ khác nhau. Hợp
+              Nhóm bao gồm 4 thành viên với vị trí và nhiệm vụ khác nhau. Hợp
               tác hoạt động với phương châm tinh thần &quot;Đoàn kết - Trách
               nhiệm - Bản lĩnh&quot;.
             </Typography>
