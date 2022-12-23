@@ -144,6 +144,7 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   columnGap: '8px',
+                  width: { xs: 'fit-content', sm: 'inherit' },
                 }}
               >
                 <ShoppingCartOutlinedIcon />
@@ -151,6 +152,7 @@ const ProductInfo: FC<IProductInfo> = ({ data, isLoading }) => {
               </LoadingButton>
               <Button
                 variant="contained"
+                sx={{ width: { xs: 'fit-content', sm: 'inherit' } }}
                 onClick={() => {
                   if (authService.isAuthenticated()) {
                     router.push({ pathname: '/cart' });
