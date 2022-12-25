@@ -6,7 +6,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="shortcut icon" href="/favicon.ico" />
-          <meta name="google-site-verification" content="T4W53qmsgsIaln51YBOjITMRI_uwkzJXu7ceWwsm470" />
+          <meta
+            name="google-site-verification"
+            content="T4W53qmsgsIaln51YBOjITMRI_uwkzJXu7ceWwsm470"
+          />
         </Head>
         <body>
           <Main />
