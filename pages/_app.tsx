@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <title>BOXO shop | Ecommerse-bookstore</title>
+        <title>BOXO shop | Nhà sách online</title>
         <meta
           name="description"
           content={`Đặt mua sách trực tuyến giá rẻ, giao hàng tận nơi trên toàn quốc, đổi trả miễn phí trong vòng 7 ngày, giao hành nhanh trong nội thành TPHCM`}
