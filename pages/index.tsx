@@ -17,7 +17,7 @@ const Home = () => {
     if (!isGenreLoading) {
       return (
         genreData &&
-        genreData?.data?.slice(0, 4)?.map((genre: any, _index: number) => {
+        genreData?.data?.slice(0, 3)?.map((genre: any, _index: number) => {
           return (
             <ProductCardItemsByGenre
               key={_index}

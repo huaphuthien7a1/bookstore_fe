@@ -13,7 +13,7 @@ class MyDocument extends Document {
           />
           <meta property="og:title" content="BOXO shop | Nhà sách online" />
           <meta name="title" content="BOXO shop | Nhà sách online" />
-          <meta property="og:url" content="https://boxo.studio" />
+          <meta property="og:url" content="https://www.boxo.studio/" />
         </Head>
         <body>
           <Main />
